@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String            @id @default(uuid())
+  email             String            @unique
+  username          String            @unique
+  password          String
+  characters        Character[]
+  tricks            Trick[]
+  adventures        Adventure[]
+  campaign_settings CampaignSetting[]
+  created_at        DateTime          @default(now())
+  updated_at        DateTime          @updatedAt
+
+  @@map("users")
+}
+
+model Character {
+  id              String     @id @default(uuid())
+  name            String     @unique
+  description     String     @unique
+  modificator_one String
+  modificator_two String?
+  sub_genre       String?
+  views           Int        @default(0)
+  creator         User       @relation(fields: [user_id], references: [id])
+  user_id         String
+  tricks          Trick[]
+  adventure       Adventure? @relation(fields: [adventure_id], references: [id])
+  adventure_id    String?
+  created_at      DateTime   @default(now())
+  updated_at      DateTime   @updatedAt
+
+  @@map("characters")
+}
+
+model Trick {
+  id           String     @id @default(uuid())
+  name         String     @unique
+  description  String     @unique
+  views        Int        @default(0)
+  rating       Int        @default(0)
+  creator      User       @relation(fields: [user_id], references: [id])
+  user_id      String
+  class        Character? @relation(fields: [character_id], references: [id])
+  character_id String?
+  created_at   DateTime   @default(now())
+  updated_at   DateTime   @updatedAt
+
+  @@map("tricks")
+}
+
+model CampaignSetting {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String   @unique
+  views       Int      @default(0)
+  creator     User     @relation(fields: [user_id], references: [id])
+  user_id     String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@map("campaign_settings")
+}
+
+model Adventure {
+  id          String      @id @default(uuid())
+  name        String      @unique
+  description String      @unique
+  views       Int         @default(0)
+  creator     User        @relation(fields: [user_id], references: [id])
+  user_id     String
+  characters  Character[]
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+
+  @@map("adventures")
+}
