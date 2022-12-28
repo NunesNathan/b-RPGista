@@ -7,6 +7,14 @@ import { UserRepository } from "../user-repository";
 @Injectable()
 export class PrismaUserRepository implements UserRepository {
   constructor(private prisma: PrismaService) {}
+  async find(id: string): Promise<User> {
+    return PrismaUserMapper.toDomain(
+      await this.prisma.user.findUniqueOrThrow({
+        where: { id },
+      }),
+    );
+  }
+
   async findMany(): Promise<User[]> {
     const rawUsers = await this.prisma.user.findMany({});
 
