@@ -5,6 +5,7 @@ import { CreateUserDto } from "../dtos/create-user-dto";
 import { UserViewModel } from "../viewmodels/user-view-model";
 import { UserViews } from "@application/usecases/user/user-views";
 import { UserFind } from "@application/usecases/user/user-find";
+import { UserEmail } from "@application/usecases/user/user-email";
 
 @Controller("users")
 export class UserController {
@@ -13,6 +14,7 @@ export class UserController {
     private userCreate: UserCreate,
     private userFind: UserFind,
     private userViews: UserViews,
+    private userEmail: UserEmail,
   ) {}
 
   @Get()
@@ -35,5 +37,10 @@ export class UserController {
   @Patch(":id/view")
   async addView(@Param("id") id: string) {
     return UserViewModel.toHttp(await this.userViews.execute(id));
+  }
+
+  @Patch(":id/email")
+  async setEmail(@Param("id") id: string, @Body() { email }) {
+    return UserViewModel.toHttp(await this.userEmail.execute(id, email));
   }
 }

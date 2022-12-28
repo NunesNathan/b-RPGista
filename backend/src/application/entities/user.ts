@@ -50,7 +50,7 @@ export class User {
     return this.props.email.value;
   }
 
-  public set email(email: string) {
+  public changeEmail(email: string) {
     this.props.email = new Email(email);
     this.props.updatedAt = new Date();
   }
