@@ -3,8 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
 }
 
 model User {
@@ -13,73 +17,117 @@ model User {
   username          String            @unique
   password          String
   characters        Character[]
-  tricks            Trick[]
-  adventures        Adventure[]
-  campaign_settings CampaignSetting[]
+  skills            Skill[]
+  threats           Threat[]
+  paranormal_powers ParanormalPower[]
+  favorites         String
+  views             Int               @default(0)
   created_at        DateTime          @default(now())
   updated_at        DateTime          @updatedAt
 
   @@map("users")
 }
 
+enum Class {
+  FIGHTER
+  SPECIALIST
+  OCCULTIST
+
+  @@map("classes")
+}
+
 model Character {
-  id              String     @id @default(uuid())
-  name            String     @unique
-  description     String     @unique
-  modificator_one String
-  modificator_two String?
-  sub_genre       String?
-  views           Int        @default(0)
-  creator         User       @relation(fields: [user_id], references: [id])
-  user_id         String
-  tricks          Trick[]
-  adventure       Adventure? @relation(fields: [adventure_id], references: [id])
-  adventure_id    String?
-  created_at      DateTime   @default(now())
-  updated_at      DateTime   @updatedAt
+  id                String            @id @default(uuid())
+  name              String            @unique
+  description       String            @unique
+  nex               Int
+  class             Class
+  actions           Skill[]
+  paranormal_powers ParanormalPower[]
+  creator           User              @relation(fields: [user_id], references: [id])
+  user_id           String
+  views             Int               @default(0)
+  favorites         Int               @default(0)
+  created_at        DateTime          @default(now())
+  updated_at        DateTime          @updatedAt
 
   @@map("characters")
 }
 
-model Trick {
-  id           String     @id @default(uuid())
-  name         String     @unique
-  description  String     @unique
-  views        Int        @default(0)
-  rating       Int        @default(0)
-  creator      User       @relation(fields: [user_id], references: [id])
-  user_id      String
-  class        Character? @relation(fields: [character_id], references: [id])
-  character_id String?
-  created_at   DateTime   @default(now())
-  updated_at   DateTime   @updatedAt
+enum Element {
+  BLOOD
+  DEATH
+  KNOWLEDGE
+  ENERGY
+  FEAR
 
-  @@map("tricks")
+  @@map("elements")
 }
 
-model CampaignSetting {
-  id          String   @id @default(uuid())
-  name        String   @unique
-  description String   @unique
-  views       Int      @default(0)
-  creator     User     @relation(fields: [user_id], references: [id])
-  user_id     String
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+model Threat {
+  id                String            @id @default(uuid())
+  name              String
+  main_element      Element?
+  actions           Skill[]
+  paranormal_powers ParanormalPower[]
+  creator           User              @relation(fields: [user_id], references: [id])
+  user_id           String
+  views             Int               @default(0)
+  favorites         Int               @default(0)
+  created_at        DateTime          @default(now())
+  updated_at        DateTime          @updatedAt
 
-  @@map("campaign_settings")
+  @@map("threats")
 }
 
-model Adventure {
-  id          String      @id @default(uuid())
-  name        String      @unique
-  description String      @unique
-  views       Int         @default(0)
-  creator     User        @relation(fields: [user_id], references: [id])
-  user_id     String
-  characters  Character[]
-  created_at  DateTime    @default(now())
-  updated_at  DateTime    @updatedAt
+enum ActionType {
+  DEFAULT
+  MOVE
+  FULL
+  FREE
+  REACTION
 
-  @@map("adventures")
+  @@map("action_types")
+}
+
+model Skill {
+  id            String     @id @default(uuid())
+  name          String     @unique
+  prerequisites String?
+  description   String
+  action        ActionType
+  effect        String?
+  threat        Threat?    @relation(fields: [threatId], references: [id])
+  threatId      String?
+  character     Character? @relation(fields: [characterId], references: [id])
+  characterId   String?
+  creator       User       @relation(fields: [user_id], references: [id])
+  user_id       String
+  views         Int        @default(0)
+  favorites     Int        @default(0)
+  created_at    DateTime   @default(now())
+  updated_at    DateTime   @updatedAt
+
+  @@map("skills")
+}
+
+model ParanormalPower {
+  id            String     @id @default(uuid())
+  name          String     @unique
+  prerequisites String?
+  description   String
+  action        ActionType
+  effect        String?
+  character     Character? @relation(fields: [characterId], references: [id])
+  characterId   String?
+  threat        Threat?    @relation(fields: [threatId], references: [id])
+  threatId      String?
+  creator       User       @relation(fields: [user_id], references: [id])
+  user_id       String
+  views         Int        @default(0)
+  favorites     Int        @default(0)
+  created_at    DateTime   @default(now())
+  updated_at    DateTime   @updatedAt
+
+  @@map("paranormal_powers")
 }
