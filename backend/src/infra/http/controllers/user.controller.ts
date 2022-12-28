@@ -18,8 +18,6 @@ export class UserController {
 
   @Post()
   async create(@Body() { email, username, password }: CreateUserDto) {
-    console.log(email, username, password);
-
     return UserViewModel.toHttp(
       await this.userCreate.execute(email, username, password),
     );

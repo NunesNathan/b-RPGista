@@ -14,12 +14,12 @@ export class PrismaUserRepository implements UserRepository {
   }
 
   async create(user: User): Promise<User> {
-    const rawUser = PrismaUserMapper.toPrisma(user);
+    const data = PrismaUserMapper.toPrisma(user);
 
     await this.prisma.user.create({
-      data: rawUser,
+      data,
     });
 
-    return PrismaUserMapper.toDomain(rawUser);
+    return PrismaUserMapper.toDomain(data);
   }
 }
