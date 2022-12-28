@@ -5,7 +5,7 @@ import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersReposito
 import { UserFindMany } from "./user-find-many";
 import { Favorites } from "@application/entities/favorites";
 
-describe("Get users", () => {
+describe("Create user", () => {
   it("should be able to create a user", async () => {
     const usersRepository = new InMemoryUserRepository();
     const userFindMany = new UserFindMany(usersRepository);
