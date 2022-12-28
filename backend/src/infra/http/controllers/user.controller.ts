@@ -3,6 +3,7 @@ import { UserCreate } from "@application/usecases/user/user-create";
 import { UserFindMany } from "@application/usecases/user/user-find-many";
 import { CreateUserDto } from "../dtos/create-user-dto";
 import { UserViewModel } from "../viewmodels/user-view-model";
+import { UserViews } from "@application/usecases/user/user-views";
 import { UserFind } from "@application/usecases/user/user-find";
 
 @Controller("users")
@@ -11,6 +12,7 @@ export class UserController {
     private userFindMany: UserFindMany,
     private userCreate: UserCreate,
     private userFind: UserFind,
+    private userViews: UserViews,
   ) {}
 
   @Get()
@@ -28,5 +30,10 @@ export class UserController {
     return UserViewModel.toHttp(
       await this.userCreate.execute(email, username, password),
     );
+  }
+
+  @Patch(":id/view")
+  async addView(@Param("id") id: string) {
+    return UserViewModel.toHttp(await this.userViews.execute(id));
   }
 }
