@@ -63,7 +63,7 @@ export class User {
     return this.props.password;
   }
 
-  public set password(password: string) {
+  public changePassword(password: string) {
     this.props.password = password;
     this.props.updatedAt = new Date();
   }

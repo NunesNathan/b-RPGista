@@ -5,10 +5,18 @@ import { UserFindMany } from "./user-find-many";
 import { UserViews } from "./user-views";
 import { UserFind } from "./user-find";
 import { UserEmail } from "./user-email";
+import { UserPassword } from "./user-password";
 
 @Module({
   imports: [DatabaseModule],
-  providers: [UserCreate, UserFindMany, UserFind, UserViews, UserEmail],
+  providers: [
+    UserCreate,
+    UserFindMany,
+    UserFind,
+    UserViews,
+    UserEmail,
+    UserPassword,
+  ],
   exports: [
     DatabaseModule,
     UserCreate,
@@ -16,6 +24,7 @@ import { UserEmail } from "./user-email";
     UserFind,
     UserViews,
     UserEmail,
+    UserPassword,
   ],
 })
 export class UserUseCasesModule {}
