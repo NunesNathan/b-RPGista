@@ -7,6 +7,7 @@ import { UserViews } from "@application/usecases/user/user-views";
 import { UserFind } from "@application/usecases/user/user-find";
 import { UserEmail } from "@application/usecases/user/user-email";
 import { UserPassword } from "@application/usecases/user/user-password";
+import { UserFavoriteList } from "@application/usecases/user/user-favorite-list";
 
 @Controller("users")
 export class UserController {
@@ -17,6 +18,7 @@ export class UserController {
     private userViews: UserViews,
     private userEmail: UserEmail,
     private userPassowrd: UserPassword,
+    private userFavoriteList: UserFavoriteList,
   ) {}
 
   @Get()
@@ -27,6 +29,14 @@ export class UserController {
   @Get(":id")
   async getUser(@Param("id") id: string) {
     return UserViewModel.toHttp(await this.userFind.execute(id));
+  }
+
+  @Get(":id/favorite_list")
+  async getFavoriteList(@Param("id") id: string) {
+    return UserViewModel.favoriteToHttp(
+      id,
+      await this.userFavoriteList.execute(id),
+    );
   }
 
   @Post()

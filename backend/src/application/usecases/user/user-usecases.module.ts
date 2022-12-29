@@ -6,6 +6,7 @@ import { UserViews } from "./user-views";
 import { UserFind } from "./user-find";
 import { UserEmail } from "./user-email";
 import { UserPassword } from "./user-password";
+import { UserFavoriteList } from "./user-favorite-list";
 
 @Module({
   imports: [DatabaseModule],
@@ -16,6 +17,7 @@ import { UserPassword } from "./user-password";
     UserViews,
     UserEmail,
     UserPassword,
+    UserFavoriteList,
   ],
   exports: [
     DatabaseModule,
@@ -25,6 +27,7 @@ import { UserPassword } from "./user-password";
     UserViews,
     UserEmail,
     UserPassword,
+    UserFavoriteList,
   ],
 })
 export class UserUseCasesModule {}
