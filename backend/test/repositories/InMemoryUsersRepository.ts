@@ -1,3 +1,4 @@
+import { Favorites } from "@application/entities/favorites";
 import { User } from "@application/entities/user";
 import { UserRepository } from "@infra/http/repositories/user-repository";
 
@@ -23,6 +24,16 @@ export class InMemoryUserRepository implements UserRepository {
 
   async find(id: string): Promise<User> {
     return this.users.filter((user) => user.id === id)[0];
+  }
+
+  async findFavorites(id: string): Promise<Favorites> {
+    const findedUser = await this.find(id);
+
+    if (!findedUser) {
+      throw new Error("User not found");
+    }
+
+    return new Favorites(findedUser.favorites);
   }
 
   async findMany(): Promise<User[]> {
