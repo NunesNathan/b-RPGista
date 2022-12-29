@@ -4,6 +4,10 @@ import { User } from "@application/entities/user";
 import { Username } from "@application/entities/username";
 import { Favorites } from "@application/entities/favorites";
 
+type PrismaFavorite = {
+  favorites: string;
+};
+
 export class PrismaUserMapper {
   static toPrisma(user: User): rawUser {
     return {
@@ -29,5 +33,9 @@ export class PrismaUserMapper {
       createdAt: user.created_at,
       updatedAt: user.updated_at,
     });
+  }
+
+  static toDomainFavorite({ favorites }: PrismaFavorite): Favorites {
+    return new Favorites(favorites);
   }
 }
