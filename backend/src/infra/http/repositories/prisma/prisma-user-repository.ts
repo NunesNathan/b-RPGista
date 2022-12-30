@@ -10,15 +10,10 @@ import { Favorites } from "@application/entities/favorites";
 export class PrismaUserRepository implements UserRepository {
   constructor(private prisma: PrismaService) {}
 
-  async update(user: User): Promise<User> {
-    const updatedUser = await this.prisma.user.update({
-      where: {
-        id: user.id,
-      },
-      data: PrismaUserMapper.toPrisma(user) as Prisma.UserUpdateInput,
-    });
+  async findMany(): Promise<User[]> {
+    const rawUsers = await this.prisma.user.findMany({});
 
-    return PrismaUserMapper.toDomain(updatedUser);
+    return rawUsers.map((user) => PrismaUserMapper.toDomain(user));
   }
 
   async find(id: string): Promise<User> {
@@ -29,10 +24,23 @@ export class PrismaUserRepository implements UserRepository {
     );
   }
 
-  async findMany(): Promise<User[]> {
-    const rawUsers = await this.prisma.user.findMany({});
+  async findByEmail(email: string): Promise<User> {
+    return PrismaUserMapper.toDomain(
+      await this.prisma.user.findUniqueOrThrow({
+        where: { email },
+      }),
+    );
+  }
 
-    return rawUsers.map((user) => PrismaUserMapper.toDomain(user));
+  async findFavorites(id: string): Promise<Favorites> {
+    return PrismaUserMapper.toDomainFavorite(
+      await this.prisma.user.findUniqueOrThrow({
+        where: { id },
+        select: {
+          favorites: true,
+        },
+      }),
+    );
   }
 
   async create(user: User): Promise<User> {
@@ -45,14 +53,14 @@ export class PrismaUserRepository implements UserRepository {
     return PrismaUserMapper.toDomain(data);
   }
 
-  async findFavorites(id: string): Promise<Favorites> {
-    return PrismaUserMapper.toDomainFavorite(
-      await this.prisma.user.findUniqueOrThrow({
-        where: { id },
-        select: {
-          favorites: true,
-        },
-      }),
-    );
+  async update(user: User): Promise<User> {
+    const updatedUser = await this.prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: PrismaUserMapper.toPrisma(user) as Prisma.UserUpdateInput,
+    });
+
+    return PrismaUserMapper.toDomain(updatedUser);
   }
 }
