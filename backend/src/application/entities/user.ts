@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { randomUUID } from "node:crypto";
 import { Replace } from "@helpers/replace";
 import { Email } from "./email";
@@ -76,7 +77,7 @@ export class User {
     this.props.views += 1;
   }
 
-  public get favorites(): string {
+  public get favorites(): Prisma.JsonValue {
     return this.props.favorites.value;
   }
 

@@ -1,3 +1,5 @@
+import { Prisma } from "@prisma/client";
+
 export enum ContentType {
   CHARACTER = "character",
   THREAT = "threat",
@@ -35,13 +37,17 @@ export class Favorites {
     this.favorites = parsed;
   }
 
-  public get value(): string {
+  public get value(): Prisma.JsonValue {
     return JSON.stringify(this.favorites);
   }
 
   public addFavorite(favorite: Favorite) {
-    this.favorites.saved.push(favorite);
-    this.favorites.count = this.favorites.saved.length;
+    if (Object.values(ContentType).includes(favorite.contentType)) {
+      this.favorites.saved.push(favorite);
+      this.favorites.count = this.favorites.saved.length;
+    } else {
+      throw new Error("Invalid favorite");
+    }
   }
 
   public removeFavorite(contentId: string) {

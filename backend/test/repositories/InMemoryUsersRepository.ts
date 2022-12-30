@@ -33,7 +33,7 @@ export class InMemoryUserRepository implements UserRepository {
       throw new Error("User not found");
     }
 
-    return new Favorites(findedUser.favorites);
+    return new Favorites(findedUser.favorites as string);
   }
 
   async findMany(): Promise<User[]> {

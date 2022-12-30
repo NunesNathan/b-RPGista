@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { Injectable } from "@nestjs/common";
 import { User } from "@application/entities/user";
 import { PrismaUserMapper } from "@infra/database/prisma/mappers/prisma-users-mapper";
@@ -14,7 +15,7 @@ export class PrismaUserRepository implements UserRepository {
       where: {
         id: user.id,
       },
-      data: PrismaUserMapper.toPrisma(user),
+      data: PrismaUserMapper.toPrisma(user) as Prisma.UserUpdateInput,
     });
 
     return PrismaUserMapper.toDomain(updatedUser);
@@ -38,7 +39,7 @@ export class PrismaUserRepository implements UserRepository {
     const data = PrismaUserMapper.toPrisma(user);
 
     await this.prisma.user.create({
-      data,
+      data: data as Prisma.UserCreateInput,
     });
 
     return PrismaUserMapper.toDomain(data);
