@@ -12,6 +12,7 @@ import { Favorite } from "@application/entities/favorites";
 import { AddFavorite } from "@application/usecases/user/user-add-favorite";
 import { RemoveFavorite } from "@application/usecases/user/user-remove-favorite";
 import { Replace } from "@helpers/replace";
+import { IsPublic } from "@application/usecases/auth/decorators/is-public.decorator";
 
 @Controller("users")
 export class UserController {
@@ -42,6 +43,7 @@ export class UserController {
     return await this.userFavoriteList.execute(id);
   }
 
+  @IsPublic()
   @Post()
   async create(
     @Body() { email, username, password }: CreateUserDto,
