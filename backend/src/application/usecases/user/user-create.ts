@@ -1,3 +1,4 @@
+import * as bcrypt from "bcrypt";
 import { Injectable } from "@nestjs/common";
 import { Email } from "@application/entities/email";
 import { Username } from "@application/entities/username";
@@ -16,7 +17,7 @@ export class UserCreate {
     const user = new User({
       email: new Email(email),
       username: new Username(username),
-      password,
+      password: await bcrypt.hash(password, 10),
     });
 
     return await this.userRepository.create(user);
