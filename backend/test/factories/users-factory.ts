@@ -8,6 +8,7 @@ import {
 } from "@application/entities/favorites";
 
 type Override = Partial<UserProps>;
+type OverrideFavorite = Partial<Favorite>;
 
 export class UserFactory {
   static user(override: Override = {}): User {
@@ -24,7 +25,7 @@ export class UserFactory {
     });
   }
 
-  static favorite(override: Override = {}): Favorite {
+  static favorite(override: OverrideFavorite = {}): Favorite {
     return {
       contentId: "test-content-id-1",
       contentType: ContentType.SKILL,
