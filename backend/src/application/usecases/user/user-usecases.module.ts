@@ -7,6 +7,7 @@ import { UserFind } from "./user-find";
 import { UserEmail } from "./user-email";
 import { UserPassword } from "./user-password";
 import { UserFavoriteList } from "./user-favorite-list";
+import { AddFavorite } from "./user-add-favorite";
 
 @Module({
   imports: [DatabaseModule],
@@ -18,6 +19,7 @@ import { UserFavoriteList } from "./user-favorite-list";
     UserEmail,
     UserPassword,
     UserFavoriteList,
+    AddFavorite,
   ],
   exports: [
     DatabaseModule,
@@ -28,6 +30,7 @@ import { UserFavoriteList } from "./user-favorite-list";
     UserEmail,
     UserPassword,
     UserFavoriteList,
+    AddFavorite,
   ],
 })
 export class UserUseCasesModule {}

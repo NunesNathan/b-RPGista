@@ -8,6 +8,9 @@ import { UserFind } from "@application/usecases/user/user-find";
 import { UserEmail } from "@application/usecases/user/user-email";
 import { UserPassword } from "@application/usecases/user/user-password";
 import { UserFavoriteList } from "@application/usecases/user/user-favorite-list";
+import { Favorite } from "@application/entities/favorites";
+import { AddFavorite } from "@application/usecases/user/user-add-favorite";
+import { Replace } from "@helpers/replace";
 
 @Controller("users")
 export class UserController {
@@ -19,6 +22,7 @@ export class UserController {
     private userEmail: UserEmail,
     private userPassowrd: UserPassword,
     private userFavoriteList: UserFavoriteList,
+    private addFavorite: AddFavorite,
   ) {}
 
   @Get()
@@ -59,5 +63,16 @@ export class UserController {
   @Patch(":id/password")
   async setPassowrd(@Param("id") id: string, @Body() { password }) {
     return UserViewModel.toHttp(await this.userPassowrd.execute(id, password));
+  }
+
+  @Patch(":id/add_favorite")
+  async addNewFavorite(
+    @Param("id") id: string,
+    @Body() favorite: Replace<Favorite, { favorited_at?: Date }>,
+  ) {
+    return UserViewModel.favoriteToHttp(
+      id,
+      await this.addFavorite.execute(id, favorite),
+    );
   }
 }
