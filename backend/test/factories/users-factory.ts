@@ -1,7 +1,11 @@
 import { Username } from "@application/entities/username";
 import { Email } from "@application/entities/email";
 import { User, UserProps } from "@application/entities/user";
-import { Favorites } from "@application/entities/favorites";
+import {
+  ContentType,
+  Favorite,
+  Favorites,
+} from "@application/entities/favorites";
 
 type Override = Partial<UserProps>;
 
@@ -18,5 +22,14 @@ export class UserFactory {
       updatedAt: new Date(),
       ...override,
     });
+  }
+
+  static favorite(override: Override = {}): Favorite {
+    return {
+      contentId: "test-content-id-1",
+      contentType: ContentType.SKILL,
+      favorited_at: new Date(),
+      ...override,
+    };
   }
 }
