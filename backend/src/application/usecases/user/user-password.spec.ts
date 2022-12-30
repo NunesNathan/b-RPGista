@@ -17,10 +17,11 @@ describe("Change user password", () => {
       expect.objectContaining({ id: "test-tester-id-1" }),
     );
 
-    userPassword.execute("test-tester-id-1", "strongPassword");
-
-    expect(await userFind.execute("test-tester-id-1")).toEqual(
-      expect.objectContaining({ password: "strongPassword" }),
+    const changedUser = await userPassword.execute(
+      "test-tester-id-1",
+      "strongPassword",
     );
+
+    expect(changedUser.createdAt !== changedUser.updatedAt).toBeTruthy();
   });
 });

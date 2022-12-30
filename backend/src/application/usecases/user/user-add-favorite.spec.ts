@@ -1,3 +1,4 @@
+import { Favorites } from "@application/entities/favorites";
 import { UserFactory } from "@test/factories/users-factory";
 import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersRepository";
 import { AddFavorite } from "./user-add-favorite";
@@ -21,7 +22,10 @@ describe("Add favorite to user", () => {
     addFavorite.execute(user.id, makeFavorite());
     addFavorite.execute(user.id, makeFavorite());
 
-    expect(await (await userFind.execute(user.id)).favoriteList).toEqual(
+    expect(
+      await new Favorites((await userFind.execute(user.id)).favorites as string)
+        .saved,
+    ).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           contentType: "skill",
@@ -32,6 +36,9 @@ describe("Add favorite to user", () => {
       ]),
     );
 
-    expect(await (await userFind.execute(user.id)).favoritesCount).toEqual(2);
+    expect(
+      await new Favorites((await userFind.execute(user.id)).favorites as string)
+        .count,
+    ).toEqual(2);
   });
 });

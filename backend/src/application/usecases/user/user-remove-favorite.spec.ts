@@ -1,3 +1,4 @@
+import { Favorites } from "@application/entities/favorites";
 import { UserFactory } from "@test/factories/users-factory";
 import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersRepository";
 import { AddFavorite } from "./user-add-favorite";
@@ -28,7 +29,10 @@ describe("Remove favorite to user", () => {
 
     removeFavorite.execute(user.id, "test-content-id-1");
 
-    expect(await (await userFind.execute(user.id)).favoriteList).toEqual(
+    expect(
+      await new Favorites((await userFind.execute(user.id)).favorites as string)
+        .saved,
+    ).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           contentType: "skill",
@@ -36,6 +40,9 @@ describe("Remove favorite to user", () => {
       ]),
     );
 
-    expect(await (await userFind.execute(user.id)).favoritesCount).toEqual(1);
+    expect(
+      await new Favorites((await userFind.execute(user.id)).favorites as string)
+        .count,
+    ).toEqual(1);
   });
 });
