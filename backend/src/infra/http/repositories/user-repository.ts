@@ -6,6 +6,8 @@ export abstract class UserRepository {
 
   abstract find(id: string): Promise<User>;
 
+  abstract findByEmail(email: string): Promise<User>;
+
   abstract findFavorites(id: string): Promise<Favorites>;
 
   abstract create(user: User): Promise<User>;
