@@ -1,9 +1,11 @@
-import { LocalStrategy } from "@application/usecases/auth/strategies/local.strategy";
 import { Module } from "@nestjs/common";
-import { AuthController } from "../../infra/http/controllers/auth.controller";
-import { AuthService } from "../usecases/auth/auth.service";
+import { LocalStrategy } from "@application/usecases/auth/strategies/local.strategy";
+import { DatabaseModule } from "@infra/database/database.module";
+import { AuthController } from "@infra/http/controllers/auth.controller";
+import { AuthService } from "@application/usecases/auth/auth.service";
 
 @Module({
+  imports: [DatabaseModule],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy],
 })
