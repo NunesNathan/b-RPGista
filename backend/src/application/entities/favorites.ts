@@ -54,6 +54,7 @@ export class Favorites {
     this.favorites.saved = this.favorites.saved.filter(
       (favorite) => favorite.contentId !== contentId,
     );
+
     this.favorites.count = this.favorites.saved.length;
   }
 

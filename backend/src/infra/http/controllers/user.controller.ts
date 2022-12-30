@@ -10,6 +10,7 @@ import { UserPassword } from "@application/usecases/user/user-password";
 import { UserFavoriteList } from "@application/usecases/user/user-favorite-list";
 import { Favorite } from "@application/entities/favorites";
 import { AddFavorite } from "@application/usecases/user/user-add-favorite";
+import { RemoveFavorite } from "@application/usecases/user/user-remove-favorite";
 import { Replace } from "@helpers/replace";
 
 @Controller("users")
@@ -23,6 +24,7 @@ export class UserController {
     private userPassowrd: UserPassword,
     private userFavoriteList: UserFavoriteList,
     private addFavorite: AddFavorite,
+    private removeFavorite: RemoveFavorite,
   ) {}
 
   @Get()
@@ -73,6 +75,14 @@ export class UserController {
     return UserViewModel.favoriteToHttp(
       id,
       await this.addFavorite.execute(id, favorite),
+    );
+  }
+
+  @Patch(":id/remove_favorite")
+  async removeAFavorite(@Param("id") id: string, @Body() { contentId }) {
+    return UserViewModel.favoriteToHttp(
+      id,
+      await this.removeFavorite.execute(id, contentId),
     );
   }
 }
