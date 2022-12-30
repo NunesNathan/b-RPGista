@@ -1,12 +1,15 @@
-import { Injectable } from "@nestjs/common";
 import { UserRepository } from "@infra/http/repositories/user-repository";
-import { User } from "@application/entities/user";
+import {
+  HttpUser,
+  UserViewModel,
+} from "@infra/http/viewmodels/user-view-model";
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class UserEmail {
   constructor(private userRepository: UserRepository) {}
 
-  public async execute(id: string, email: string): Promise<User> {
+  public async execute(id: string, email: string): Promise<HttpUser> {
     const findedUser = await this.userRepository.find(id);
 
     if (!findedUser) {
@@ -17,6 +20,6 @@ export class UserEmail {
 
     await this.userRepository.update(findedUser);
 
-    return findedUser;
+    return UserViewModel.toHttp(findedUser);
   }
 }

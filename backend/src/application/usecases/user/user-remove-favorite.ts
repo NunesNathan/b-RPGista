@@ -1,12 +1,15 @@
-import { Injectable } from "@nestjs/common";
 import { UserRepository } from "@infra/http/repositories/user-repository";
-import { Favorites } from "@application/entities/favorites";
+import {
+  HttpFavorite,
+  UserViewModel,
+} from "@infra/http/viewmodels/user-view-model";
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class RemoveFavorite {
   constructor(private userRepository: UserRepository) {}
 
-  public async execute(id: string, contentId: string): Promise<Favorites> {
+  public async execute(id: string, contentId: string): Promise<HttpFavorite> {
     const findedUser = await this.userRepository.find(id);
 
     if (!findedUser) {
@@ -17,6 +20,6 @@ export class RemoveFavorite {
 
     await this.userRepository.update(findedUser);
 
-    return result;
+    return UserViewModel.favoriteToHttp(id, result);
   }
 }

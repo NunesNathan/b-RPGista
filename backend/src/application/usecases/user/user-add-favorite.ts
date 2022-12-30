@@ -1,7 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { UserRepository } from "@infra/http/repositories/user-repository";
-import { Favorite, Favorites } from "@application/entities/favorites";
+import { Favorite } from "@application/entities/favorites";
 import { Replace } from "@helpers/replace";
+import { UserRepository } from "@infra/http/repositories/user-repository";
+import {
+  HttpFavorite,
+  UserViewModel,
+} from "@infra/http/viewmodels/user-view-model";
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class AddFavorite {
@@ -10,7 +14,7 @@ export class AddFavorite {
   public async execute(
     id: string,
     { contentId, contentType }: Replace<Favorite, { favorited_at?: Date }>,
-  ): Promise<Favorites> {
+  ): Promise<HttpFavorite> {
     const findedUser = await this.userRepository.find(id);
 
     if (!findedUser) {
@@ -25,6 +29,6 @@ export class AddFavorite {
 
     await this.userRepository.update(findedUser);
 
-    return result;
+    return UserViewModel.favoriteToHttp(id, result);
   }
 }

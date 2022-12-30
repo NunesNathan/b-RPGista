@@ -1,18 +1,21 @@
-import { Injectable } from "@nestjs/common";
 import { UserRepository } from "@infra/http/repositories/user-repository";
-import { User } from "@application/entities/user";
+import {
+  HttpUser,
+  UserViewModel,
+} from "@infra/http/viewmodels/user-view-model";
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class UserFind {
   constructor(private userRepository: UserRepository) {}
 
-  public async execute(id: string): Promise<User> {
+  public async execute(id: string): Promise<HttpUser> {
     const findedUser = await this.userRepository.find(id);
 
     if (!findedUser) {
       throw new Error(`User not found`);
     }
 
-    return findedUser;
+    return UserViewModel.toHttp(findedUser);
   }
 }
