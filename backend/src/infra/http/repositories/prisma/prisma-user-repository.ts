@@ -15,31 +15,43 @@ export class PrismaUserRepository implements UserRepository {
     return rawUsers.map((user) => PrismaUserMapper.toDomain(user));
   }
 
-  async find(id: string): Promise<User> {
-    return PrismaUserMapper.toDomain(
-      await this.prisma.user.findUniqueOrThrow({
-        where: { id },
-      }),
-    );
+  async find(id: string): Promise<User | null> {
+    const findedUser = await this.prisma.user.findUnique({
+      where: { id },
+    });
+
+    if (findedUser) {
+      return PrismaUserMapper.toDomain(findedUser);
+    }
+
+    return null;
   }
 
-  async findByEmail(email: string): Promise<User> {
-    return PrismaUserMapper.toDomain(
-      await this.prisma.user.findUniqueOrThrow({
-        where: { email },
-      }),
-    );
+  async findByEmail(email: string): Promise<User | null> {
+    const findedUser = await this.prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (findedUser) {
+      return PrismaUserMapper.toDomain(findedUser);
+    }
+
+    return null;
   }
 
-  async findFavorites(id: string): Promise<Favorites> {
-    return PrismaUserMapper.toDomainFavorite(
-      await this.prisma.user.findUniqueOrThrow({
-        where: { id },
-        select: {
-          favorites: true,
-        },
-      }),
-    );
+  async findFavorites(id: string): Promise<Favorites | null> {
+    const findedUserFavorites = await this.prisma.user.findUnique({
+      where: { id },
+      select: {
+        favorites: true,
+      },
+    });
+
+    if (findedUserFavorites) {
+      return PrismaUserMapper.toDomainFavorite(findedUserFavorites);
+    }
+
+    return null;
   }
 
   async create(user: User): Promise<User> {

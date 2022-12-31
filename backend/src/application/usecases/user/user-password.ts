@@ -4,7 +4,7 @@ import {
   HttpUser,
   UserViewModel,
 } from "@infra/http/viewmodels/user-view-model";
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 
 @Injectable()
 export class UserPassword {
@@ -14,7 +14,7 @@ export class UserPassword {
     const findedUser = await this.userRepository.find(id);
 
     if (!findedUser) {
-      throw new Error(`User not found`);
+      throw new UnauthorizedException();
     }
 
     findedUser.changePassword(await bcrypt.hash(password, 10));

@@ -3,7 +3,7 @@ import {
   HttpUser,
   UserViewModel,
 } from "@infra/http/viewmodels/user-view-model";
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 
 @Injectable()
 export class UserFind {
@@ -13,7 +13,7 @@ export class UserFind {
     const findedUser = await this.userRepository.find(id);
 
     if (!findedUser) {
-      throw new Error(`User not found`);
+      throw new UnauthorizedException();
     }
 
     return UserViewModel.toHttp(findedUser);

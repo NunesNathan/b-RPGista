@@ -1,3 +1,4 @@
+import { InvalidFavoriteError } from "@application/auth/errors/invalid-favorite.error";
 import { Prisma } from "@prisma/client";
 
 export enum ContentType {
@@ -31,7 +32,7 @@ export class Favorites {
     const isValidFavorites = this.validator(parsed);
 
     if (!isValidFavorites) {
-      throw new Error("Invalid favorite");
+      throw new InvalidFavoriteError();
     }
 
     this.favorites = parsed;
@@ -46,7 +47,7 @@ export class Favorites {
       this.favorites.saved.push(favorite);
       this.favorites.count = this.favorites.saved.length;
     } else {
-      throw new Error("Invalid favorite");
+      throw new InvalidFavoriteError();
     }
   }
 

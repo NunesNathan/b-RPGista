@@ -2,7 +2,7 @@ import * as bcrypt from "bcrypt";
 import { LoginRequestBody } from "@application/auth/middlewares/models/login-request-body";
 import { UserRepository } from "@infra/http/repositories/user-repository";
 import { HttpUser } from "@infra/http/viewmodels/user-view-model";
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 
 @Injectable()
 export class UserDelete {
@@ -27,5 +27,7 @@ export class UserDelete {
     ) {
       await this.userRepository.delete(findedUser.email);
     }
+
+    throw new UnauthorizedException();
   }
 }

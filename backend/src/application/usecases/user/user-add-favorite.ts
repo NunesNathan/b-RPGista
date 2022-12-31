@@ -5,7 +5,7 @@ import {
   HttpFavorite,
   UserViewModel,
 } from "@infra/http/viewmodels/user-view-model";
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 
 @Injectable()
 export class AddFavorite {
@@ -18,7 +18,7 @@ export class AddFavorite {
     const findedUser = await this.userRepository.find(id);
 
     if (!findedUser) {
-      throw new Error(`User not found`);
+      throw new UnauthorizedException();
     }
 
     const result = findedUser.addFavorite({

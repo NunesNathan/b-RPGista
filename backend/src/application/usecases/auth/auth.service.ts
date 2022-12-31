@@ -7,6 +7,7 @@ import {
 } from "@infra/http/viewmodels/user-view-model";
 import { JwtService } from "@nestjs/jwt";
 import { JwtToken, UserPayload } from "./models/auth-types";
+import { WrongCredentialsError } from "@application/auth/errors/wrong-credentials.error";
 
 @Injectable()
 export class AuthService {
@@ -34,8 +35,10 @@ export class AuthService {
       if (await bcrypt.compare(password, findedUser.password)) {
         return UserViewModel.toHttp(findedUser);
       }
+
+      throw new WrongCredentialsError(findedUser.updatedAt.toDateString());
     }
 
-    throw new Error("User or password provided is incorrect.");
+    throw new WrongCredentialsError();
   }
 }

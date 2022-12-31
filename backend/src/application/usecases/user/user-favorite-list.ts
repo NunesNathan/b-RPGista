@@ -3,16 +3,19 @@ import {
   HttpFavorite,
   UserViewModel,
 } from "@infra/http/viewmodels/user-view-model";
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 
 @Injectable()
 export class UserFavoriteList {
   constructor(private userRepository: UserRepository) {}
 
   public async execute(id: string): Promise<HttpFavorite> {
-    return UserViewModel.favoriteToHttp(
-      id,
-      await this.userRepository.findFavorites(id),
-    );
+    const findedUserFavorites = await this.userRepository.findFavorites(id);
+
+    if (!findedUserFavorites) {
+      throw new NotFoundException();
+    }
+
+    return UserViewModel.favoriteToHttp(id, findedUserFavorites);
   }
 }
