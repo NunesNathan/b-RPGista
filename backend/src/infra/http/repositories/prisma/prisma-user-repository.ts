@@ -9,7 +9,6 @@ import { Favorites } from "@application/entities/favorites";
 @Injectable()
 export class PrismaUserRepository implements UserRepository {
   constructor(private prisma: PrismaService) {}
-
   async findMany(): Promise<User[]> {
     const rawUsers = await this.prisma.user.findMany({});
 
@@ -62,5 +61,13 @@ export class PrismaUserRepository implements UserRepository {
     });
 
     return PrismaUserMapper.toDomain(updatedUser);
+  }
+
+  async delete(email: string): Promise<void> {
+    await this.prisma.user.delete({
+      where: {
+        email,
+      },
+    });
   }
 }
