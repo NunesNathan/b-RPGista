@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
 import { DatabaseModule } from "@infra/database/database.module";
 import { UserCreate } from "./user-create";
 import { UserFindMany } from "./user-find-many";
@@ -9,9 +9,12 @@ import { UserPassword } from "./user-password";
 import { UserFavoriteList } from "./user-favorite-list";
 import { AddFavorite } from "./user-add-favorite";
 import { RemoveFavorite } from "./user-remove-favorite";
+import { LoginValidationMiddleware } from "@application/auth/middlewares/login-validation.middleware";
+import { UserDelete } from "./user-delete";
+import { AuthModule } from "@application/auth/auth.module";
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, AuthModule],
   providers: [
     UserCreate,
     UserFindMany,
@@ -22,6 +25,7 @@ import { RemoveFavorite } from "./user-remove-favorite";
     UserFavoriteList,
     AddFavorite,
     RemoveFavorite,
+    UserDelete,
   ],
   exports: [
     DatabaseModule,
@@ -34,6 +38,11 @@ import { RemoveFavorite } from "./user-remove-favorite";
     UserFavoriteList,
     AddFavorite,
     RemoveFavorite,
+    UserDelete,
   ],
 })
-export class UserUseCasesModule {}
+export class UserUseCasesModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoginValidationMiddleware).forRoutes("remove_account");
+  }
+}

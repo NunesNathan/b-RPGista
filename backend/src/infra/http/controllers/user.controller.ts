@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Patch, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from "@nestjs/common";
 import { UserCreate } from "@application/usecases/user/user-create";
 import { UserFindMany } from "@application/usecases/user/user-find-many";
 import { CreateUserDto } from "../dtos/create-user-dto";
@@ -13,6 +22,10 @@ import { AddFavorite } from "@application/usecases/user/user-add-favorite";
 import { RemoveFavorite } from "@application/usecases/user/user-remove-favorite";
 import { Replace } from "@helpers/replace";
 import { IsPublic } from "@application/usecases/auth/decorators/is-public.decorator";
+import { LocalStrategy } from "@application/usecases/auth/strategies/local.strategy";
+import { CurrentUser } from "@application/usecases/auth/decorators/current-user.decorator";
+import { LoginRequestBody } from "@application/auth/middlewares/models/login-request-body";
+import { UserDelete } from "@application/usecases/user/user-delete";
 
 @Controller("users")
 export class UserController {
@@ -26,6 +39,7 @@ export class UserController {
     private userFavoriteList: UserFavoriteList,
     private addFavorite: AddFavorite,
     private removeFavorite: RemoveFavorite,
+    private userDelete: UserDelete,
   ) {}
 
   @Get()
@@ -86,5 +100,15 @@ export class UserController {
     @Body() { contentId },
   ): Promise<HttpFavorite> {
     return await this.removeFavorite.execute(id, contentId);
+  }
+
+  @Delete(":id/delete_account")
+  @UseGuards(LocalStrategy)
+  async deleteUser(
+    @Param("id") id: string,
+    @CurrentUser() user: HttpUser,
+    @Body() providedUser: LoginRequestBody,
+  ): Promise<void> {
+    await this.userDelete.execute(id, user, providedUser);
   }
 }
