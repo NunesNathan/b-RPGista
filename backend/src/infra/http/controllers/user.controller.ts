@@ -59,29 +59,29 @@ export class UserController {
 
   @IsPublic()
   @Post()
-  async create(
+  async createUser(
     @Body() { email, username, password }: CreateUserDto,
   ): Promise<HttpUser> {
     return await this.userCreate.execute(email, username, password);
   }
 
-  @Patch(":id/view")
+  @Patch(":id/add_view")
   async addView(@Param("id") id: string): Promise<HttpUser> {
     return await this.userViews.execute(id);
   }
 
-  @Patch(":id/email")
-  async setEmail(
+  @Patch(":id/change_email")
+  async changeEmail(
     @Param("id") id: string,
-    @Body() { email },
+    @Body() { email }: { email: string },
   ): Promise<HttpUser> {
     return await this.userEmail.execute(id, email);
   }
 
-  @Patch(":id/password")
-  async setPassowrd(
+  @Patch(":id/change_password")
+  async changePassword(
     @Param("id") id: string,
-    @Body() { password },
+    @Body() { password }: { password: string },
   ): Promise<HttpUser> {
     return await this.userPassowrd.execute(id, password);
   }
@@ -97,7 +97,7 @@ export class UserController {
   @Patch(":id/remove_favorite")
   async removeAFavorite(
     @Param("id") id: string,
-    @Body() { contentId },
+    @Body() { contentId }: { contentId: string },
   ): Promise<HttpFavorite> {
     return await this.removeFavorite.execute(id, contentId);
   }
