@@ -48,4 +48,12 @@ export class InMemoryUserRepository implements UserRepository {
 
     return findedUser;
   }
+
+  async delete(email: string): Promise<void> {
+    this.users = this.users.filter((eUser) => {
+      if (email !== eUser.email) {
+        return eUser;
+      }
+    });
+  }
 }
