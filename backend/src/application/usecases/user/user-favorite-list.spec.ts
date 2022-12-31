@@ -1,7 +1,7 @@
 import { UserFactory } from "@test/factories/users-factory";
 import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersRepository";
-import { UserFind } from "./user-find";
 import { UserFavoriteList } from "./user-favorite-list";
+import { UserFind } from "./user-find";
 
 describe("Get user favorite list", () => {
   const makeUser = UserFactory.user;

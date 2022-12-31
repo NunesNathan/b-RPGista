@@ -1,9 +1,9 @@
-import { Prisma } from "@prisma/client";
 import { randomUUID } from "node:crypto";
+import { Prisma } from "@prisma/client";
 import { Replace } from "@helpers/replace";
 import { Email } from "./email";
-import { Username } from "./username";
 import { Favorite, Favorites } from "./favorites";
+import { Username } from "./username";
 
 export interface UserProps {
   id: string;

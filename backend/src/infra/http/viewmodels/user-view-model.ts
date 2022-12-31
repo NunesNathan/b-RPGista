@@ -1,6 +1,6 @@
+import { Prisma } from "@prisma/client";
 import { Favorite, Favorites } from "@application/entities/favorites";
 import { User } from "@application/entities/user";
-import { Prisma } from "@prisma/client";
 
 export interface HttpUser {
   id: string;

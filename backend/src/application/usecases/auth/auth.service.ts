@@ -1,13 +1,13 @@
-import { Injectable } from "@nestjs/common";
 import * as bcrypt from "bcrypt";
+import { Injectable } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { WrongCredentialsError } from "@application/auth/errors/wrong-credentials.error";
 import { UserRepository } from "@infra/http/repositories/user-repository";
 import {
   HttpUser,
   UserViewModel,
 } from "@infra/http/viewmodels/user-view-model";
-import { JwtService } from "@nestjs/jwt";
 import { JwtToken, UserPayload } from "./models/auth-types";
-import { WrongCredentialsError } from "@application/auth/errors/wrong-credentials.error";
 
 @Injectable()
 export class AuthService {

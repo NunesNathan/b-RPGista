@@ -1,10 +1,10 @@
 import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
+import { JwtModule } from "@nestjs/jwt";
+import { AuthService } from "@application/usecases/auth/auth.service";
+import { JwtStrategy } from "@application/usecases/auth/strategies/jwt.strategy";
 import { LocalStrategy } from "@application/usecases/auth/strategies/local.strategy";
 import { DatabaseModule } from "@infra/database/database.module";
 import { AuthController } from "@infra/http/controllers/auth.controller";
-import { AuthService } from "@application/usecases/auth/auth.service";
-import { JwtModule } from "@nestjs/jwt";
-import { JwtStrategy } from "@application/usecases/auth/strategies/jwt.strategy";
 import { LoginValidationMiddleware } from "./middlewares/login-validation.middleware";
 
 @Module({

@@ -1,9 +1,9 @@
+import { Injectable } from "@nestjs/common";
 import { UserRepository } from "@infra/http/repositories/user-repository";
 import {
   HttpUser,
   UserViewModel,
 } from "@infra/http/viewmodels/user-view-model";
-import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class UserFindMany {

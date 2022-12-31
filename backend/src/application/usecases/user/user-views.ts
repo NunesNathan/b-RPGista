@@ -1,12 +1,12 @@
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { UserRepository } from "@infra/http/repositories/user-repository";
 import {
   HttpUser,
   UserViewModel,
 } from "@infra/http/viewmodels/user-view-model";
-import { Injectable, UnauthorizedException } from "@nestjs/common";
 
 @Injectable()
-export class UserViews {
+export class addView {
   constructor(private userRepository: UserRepository) {}
 
   public async execute(id: string): Promise<HttpUser> {

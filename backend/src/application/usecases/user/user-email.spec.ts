@@ -1,7 +1,7 @@
 import { UserFactory } from "@test/factories/users-factory";
 import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersRepository";
-import { UserFind } from "./user-find";
 import { UserEmail } from "./user-email";
+import { UserFind } from "./user-find";
 
 describe("Change user email", () => {
   const makeUser = UserFactory.user;

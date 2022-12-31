@@ -1,10 +1,10 @@
+import * as bcrypt from "bcrypt";
+import { LoginRequestBody } from "@application/auth/middlewares/models/login-request-body";
+import { HttpUser } from "@infra/http/viewmodels/user-view-model";
 import { UserFactory } from "@test/factories/users-factory";
 import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersRepository";
-import { UserFindMany } from "./user-find-many";
 import { UserDelete } from "./user-delete";
-import { HttpUser } from "@infra/http/viewmodels/user-view-model";
-import { LoginRequestBody } from "@application/auth/middlewares/models/login-request-body";
-import * as bcrypt from "bcrypt";
+import { UserFindMany } from "./user-find-many";
 
 describe("Delete user", () => {
   beforeAll(async () => {

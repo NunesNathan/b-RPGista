@@ -1,9 +1,9 @@
 import * as bcrypt from "bcrypt";
 import { Injectable } from "@nestjs/common";
 import { Email } from "@application/entities/email";
+import { User } from "@application/entities/user";
 import { Username } from "@application/entities/username";
 import { UserRepository } from "@infra/http/repositories/user-repository";
-import { User } from "@application/entities/user";
 import {
   HttpUser,
   UserViewModel,

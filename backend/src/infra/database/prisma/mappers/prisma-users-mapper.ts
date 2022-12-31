@@ -1,8 +1,8 @@
 import { Prisma, User as rawUser } from "@prisma/client";
 import { Email } from "@application/entities/email";
+import { Favorites } from "@application/entities/favorites";
 import { User } from "@application/entities/user";
 import { Username } from "@application/entities/username";
-import { Favorites } from "@application/entities/favorites";
 
 type PrismaFavorite = {
   favorites: Prisma.JsonValue;

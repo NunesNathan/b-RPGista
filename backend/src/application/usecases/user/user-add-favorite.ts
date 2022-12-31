@@ -1,3 +1,4 @@
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { Favorite } from "@application/entities/favorites";
 import { Replace } from "@helpers/replace";
 import { UserRepository } from "@infra/http/repositories/user-repository";
@@ -5,7 +6,6 @@ import {
   HttpFavorite,
   UserViewModel,
 } from "@infra/http/viewmodels/user-view-model";
-import { Injectable, UnauthorizedException } from "@nestjs/common";
 
 @Injectable()
 export class AddFavorite {

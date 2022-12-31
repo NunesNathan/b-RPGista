@@ -1,9 +1,9 @@
-import { Username } from "@application/entities/username";
 import { Email } from "@application/entities/email";
+import { Favorites } from "@application/entities/favorites";
+import { Username } from "@application/entities/username";
 import { UserFactory } from "@test/factories/users-factory";
 import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersRepository";
 import { UserFindMany } from "./user-find-many";
-import { Favorites } from "@application/entities/favorites";
 
 describe("Create user", () => {
   const makeUser = UserFactory.user;

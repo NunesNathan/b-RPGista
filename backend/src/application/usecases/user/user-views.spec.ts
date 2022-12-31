@@ -1,7 +1,7 @@
 import { UserFactory } from "@test/factories/users-factory";
 import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersRepository";
 import { UserFind } from "./user-find";
-import { UserViews } from "./user-views";
+import { addView } from "./user-views";
 
 describe("Add view to user", () => {
   const makeUser = UserFactory.user;
@@ -9,7 +9,7 @@ describe("Add view to user", () => {
   it("should be able to get a user using id", async () => {
     const usersRepository = new InMemoryUserRepository();
     const userFind = new UserFind(usersRepository);
-    const userViews = new UserViews(usersRepository);
+    const userViews = new addView(usersRepository);
 
     await usersRepository.create(makeUser());
 

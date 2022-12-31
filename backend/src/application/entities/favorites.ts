@@ -1,5 +1,5 @@
-import { InvalidFavoriteError } from "@application/auth/errors/invalid-favorite.error";
 import { Prisma } from "@prisma/client";
+import { InvalidFavoriteError } from "@application/auth/errors/invalid-favorite.error";
 
 export enum ContentType {
   CHARACTER = "character",

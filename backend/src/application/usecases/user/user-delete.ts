@@ -1,8 +1,8 @@
 import * as bcrypt from "bcrypt";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { LoginRequestBody } from "@application/auth/middlewares/models/login-request-body";
 import { UserRepository } from "@infra/http/repositories/user-repository";
 import { HttpUser } from "@infra/http/viewmodels/user-view-model";
-import { Injectable, UnauthorizedException } from "@nestjs/common";
 
 @Injectable()
 export class UserDelete {

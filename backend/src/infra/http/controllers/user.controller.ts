@@ -8,24 +8,24 @@ import {
   Post,
   UseGuards,
 } from "@nestjs/common";
-import { UserCreate } from "@application/usecases/user/user-create";
-import { UserFindMany } from "@application/usecases/user/user-find-many";
-import { CreateUserDto } from "../dtos/create-user-dto";
-import { HttpFavorite, HttpUser } from "../viewmodels/user-view-model";
-import { UserViews } from "@application/usecases/user/user-views";
-import { UserFind } from "@application/usecases/user/user-find";
-import { UserEmail } from "@application/usecases/user/user-email";
-import { UserPassword } from "@application/usecases/user/user-password";
-import { UserFavoriteList } from "@application/usecases/user/user-favorite-list";
-import { Favorite } from "@application/entities/favorites";
-import { AddFavorite } from "@application/usecases/user/user-add-favorite";
-import { RemoveFavorite } from "@application/usecases/user/user-remove-favorite";
-import { Replace } from "@helpers/replace";
+import { CurrentUser } from "@application/usecases/auth/decorators/current-user.decorator";
 import { IsPublic } from "@application/usecases/auth/decorators/is-public.decorator";
 import { LocalStrategy } from "@application/usecases/auth/strategies/local.strategy";
-import { CurrentUser } from "@application/usecases/auth/decorators/current-user.decorator";
 import { LoginRequestBody } from "@application/auth/middlewares/models/login-request-body";
+import { Favorite } from "@application/entities/favorites";
+import { AddFavorite } from "@application/usecases/user/user-add-favorite";
+import { UserCreate } from "@application/usecases/user/user-create";
 import { UserDelete } from "@application/usecases/user/user-delete";
+import { UserEmail } from "@application/usecases/user/user-email";
+import { UserFavoriteList } from "@application/usecases/user/user-favorite-list";
+import { UserFindMany } from "@application/usecases/user/user-find-many";
+import { UserFind } from "@application/usecases/user/user-find";
+import { UserPassword } from "@application/usecases/user/user-password";
+import { RemoveFavorite } from "@application/usecases/user/user-remove-favorite";
+import { addView } from "@application/usecases/user/user-views";
+import { Replace } from "@helpers/replace";
+import { CreateUserDto } from "../dtos/create-user-dto";
+import { HttpFavorite, HttpUser } from "../viewmodels/user-view-model";
 
 @Controller("users")
 export class UserController {
@@ -33,7 +33,7 @@ export class UserController {
     private userFindMany: UserFindMany,
     private userCreate: UserCreate,
     private userFind: UserFind,
-    private userViews: UserViews,
+    private userViews: addView,
     private userEmail: UserEmail,
     private userPassowrd: UserPassword,
     private userFavoriteList: UserFavoriteList,

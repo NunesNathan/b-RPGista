@@ -1,9 +1,9 @@
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { UserRepository } from "@infra/http/repositories/user-repository";
 import {
   HttpFavorite,
   UserViewModel,
 } from "@infra/http/viewmodels/user-view-model";
-import { Injectable, NotFoundException } from "@nestjs/common";
 
 @Injectable()
 export class UserFavoriteList {
