@@ -1,6 +1,6 @@
 import { HttpUser } from "@infra/http/viewmodels/user-view-model";
 import { createParamDecorator, ExecutionContext } from "@nestjs/common";
-import { AuthRequest } from "../models/auth-types";
+import { AuthRequest } from "../models/auth-request.types";
 
 export const CurrentUser = createParamDecorator(
   (data: unknown, context: ExecutionContext): HttpUser => {
