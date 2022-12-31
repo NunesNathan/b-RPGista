@@ -1,8 +1,10 @@
-import { makeUser } from "@test/factories/users-factory";
+import { UserFactory } from "@test/factories/users-factory";
 import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersRepository";
 import { UserFindMany } from "./user-find-many";
 
 describe("Get users", () => {
+  const makeUser = UserFactory.user;
+
   it("should be able to get empty list", async () => {
     const usersRepository = new InMemoryUserRepository();
     const userFindMany = new UserFindMany(usersRepository);

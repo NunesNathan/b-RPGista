@@ -1,27 +1,114 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from "@nestjs/common";
+import { CurrentUser } from "@application/usecases/auth/decorators/current-user.decorator";
+import { IsPublic } from "@application/usecases/auth/decorators/is-public.decorator";
+import { LocalStrategy } from "@application/usecases/auth/strategies/local.strategy";
+import { LoginRequestBody } from "@application/auth/middlewares/models/login-request-body";
+import { Favorite } from "@application/entities/favorites";
+import { AddFavorite } from "@application/usecases/user/user-add-favorite";
 import { UserCreate } from "@application/usecases/user/user-create";
+import { UserDelete } from "@application/usecases/user/user-delete";
+import { UserEmail } from "@application/usecases/user/user-email";
+import { UserFavoriteList } from "@application/usecases/user/user-favorite-list";
 import { UserFindMany } from "@application/usecases/user/user-find-many";
+import { UserFind } from "@application/usecases/user/user-find";
+import { UserPassword } from "@application/usecases/user/user-password";
+import { RemoveFavorite } from "@application/usecases/user/user-remove-favorite";
+import { addView } from "@application/usecases/user/user-views";
+import { Replace } from "@helpers/replace";
 import { CreateUserDto } from "../dtos/create-user-dto";
-import { UserViewModel } from "../viewmodels/user-view-model";
+import { HttpFavorite, HttpUser } from "../viewmodels/user-view-model";
 
 @Controller("users")
 export class UserController {
   constructor(
     private userFindMany: UserFindMany,
     private userCreate: UserCreate,
+    private userFind: UserFind,
+    private userViews: addView,
+    private userEmail: UserEmail,
+    private userPassowrd: UserPassword,
+    private userFavoriteList: UserFavoriteList,
+    private addFavorite: AddFavorite,
+    private removeFavorite: RemoveFavorite,
+    private userDelete: UserDelete,
   ) {}
 
   @Get()
-  async getUsers() {
-    return (await this.userFindMany.execute()).map(UserViewModel.toHttp);
+  async getUsers(): Promise<HttpUser[]> {
+    return await this.userFindMany.execute();
   }
 
-  @Post()
-  async create(@Body() { email, username, password }: CreateUserDto) {
-    console.log(email, username, password);
+  @Get(":id")
+  async getUser(@Param("id") id: string): Promise<HttpUser> {
+    return await this.userFind.execute(id);
+  }
 
-    return UserViewModel.toHttp(
-      await this.userCreate.execute(email, username, password),
-    );
+  @Get(":id/favorite_list")
+  async getFavoriteList(@Param("id") id: string): Promise<HttpFavorite> {
+    return await this.userFavoriteList.execute(id);
+  }
+
+  @IsPublic()
+  @Post()
+  async create(
+    @Body() { email, username, password }: CreateUserDto,
+  ): Promise<HttpUser> {
+    return await this.userCreate.execute(email, username, password);
+  }
+
+  @Patch(":id/view")
+  async addView(@Param("id") id: string): Promise<HttpUser> {
+    return await this.userViews.execute(id);
+  }
+
+  @Patch(":id/email")
+  async setEmail(
+    @Param("id") id: string,
+    @Body() { email },
+  ): Promise<HttpUser> {
+    return await this.userEmail.execute(id, email);
+  }
+
+  @Patch(":id/password")
+  async setPassowrd(
+    @Param("id") id: string,
+    @Body() { password },
+  ): Promise<HttpUser> {
+    return await this.userPassowrd.execute(id, password);
+  }
+
+  @Patch(":id/add_favorite")
+  async addNewFavorite(
+    @Param("id") id: string,
+    @Body() favorite: Replace<Favorite, { favorited_at?: Date }>,
+  ): Promise<HttpFavorite> {
+    return await this.addFavorite.execute(id, favorite);
+  }
+
+  @Patch(":id/remove_favorite")
+  async removeAFavorite(
+    @Param("id") id: string,
+    @Body() { contentId },
+  ): Promise<HttpFavorite> {
+    return await this.removeFavorite.execute(id, contentId);
+  }
+
+  @Delete(":id/delete_account")
+  @UseGuards(LocalStrategy)
+  async deleteUser(
+    @Param("id") id: string,
+    @CurrentUser() user: HttpUser,
+    @Body() providedUser: LoginRequestBody,
+  ): Promise<void> {
+    await this.userDelete.execute(id, user, providedUser);
   }
 }

@@ -1,3 +1,5 @@
+import { InvalidEmailError } from "@application/auth/errors/invalid-email.error";
+
 export class Email {
   private readonly email: string;
 
@@ -13,7 +15,7 @@ export class Email {
     const isValidEmail = this.validator(email);
 
     if (!isValidEmail) {
-      throw new Error("Invalid email");
+      throw new InvalidEmailError();
     }
 
     this.email = email;

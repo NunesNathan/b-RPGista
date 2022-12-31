@@ -1,8 +1,13 @@
+import * as bcrypt from "bcrypt";
 import { Injectable } from "@nestjs/common";
 import { Email } from "@application/entities/email";
+import { User } from "@application/entities/user";
 import { Username } from "@application/entities/username";
 import { UserRepository } from "@infra/http/repositories/user-repository";
-import { User } from "@application/entities/user";
+import {
+  HttpUser,
+  UserViewModel,
+} from "@infra/http/viewmodels/user-view-model";
 
 @Injectable()
 export class UserCreate {
@@ -12,13 +17,13 @@ export class UserCreate {
     email: string,
     username: string,
     password: string,
-  ): Promise<User> {
+  ): Promise<HttpUser> {
     const user = new User({
       email: new Email(email),
       username: new Username(username),
-      password,
+      password: await bcrypt.hash(password, 10),
     });
 
-    return await this.userRepository.create(user);
+    return UserViewModel.toHttp(await this.userRepository.create(user));
   }
 }

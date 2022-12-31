@@ -1,3 +1,5 @@
+import { InvalidUsernameError } from "@application/auth/errors/invalid-username.error";
+
 export class Username {
   private readonly userName: string;
 
@@ -9,7 +11,7 @@ export class Username {
     const isValidUserName = this.validator(userName);
 
     if (!isValidUserName) {
-      throw new Error("Invalid user name");
+      throw new InvalidUsernameError();
     }
 
     this.userName = userName;
