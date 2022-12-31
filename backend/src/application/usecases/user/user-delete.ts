@@ -25,7 +25,7 @@ export class UserDelete {
       user.email === providedUser.email &&
       (await bcrypt.compare(providedUser.password, findedUser.password))
     ) {
-      await this.userRepository.delete(findedUser.email);
+      return await this.userRepository.delete(findedUser.email);
     }
 
     throw new UnauthorizedException();
