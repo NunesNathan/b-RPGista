@@ -1,4 +1,4 @@
-import { Favorites } from "@application/entities/favorites";
+import { Favorites } from "@application/entities/user/favorites";
 import { UserFactory } from "@test/factories/users-factory";
 import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersRepository";
 import { AddFavorite } from "./user-add-favorite";

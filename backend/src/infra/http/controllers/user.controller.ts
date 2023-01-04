@@ -12,7 +12,7 @@ import { CurrentUser } from "@application/usecases/auth/decorators/current-user.
 import { IsPublic } from "@application/usecases/auth/decorators/is-public.decorator";
 import { LocalStrategy } from "@application/usecases/auth/strategies/local.strategy";
 import { LoginRequestBody } from "@application/auth/middlewares/models/login-request-body";
-import { Favorite } from "@application/entities/favorites";
+import { Favorite } from "@application/entities/user/favorites";
 import { AddFavorite } from "@application/usecases/user/user-add-favorite";
 import { UserCreate } from "@application/usecases/user/user-create";
 import { UserDelete } from "@application/usecases/user/user-delete";

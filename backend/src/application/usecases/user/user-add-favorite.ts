@@ -1,5 +1,5 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { Favorite } from "@application/entities/favorites";
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { Favorite } from "@application/entities/user/favorites";
 import { Replace } from "@helpers/replace";
 import { UserRepository } from "@infra/http/repositories/user-repository";
 import {
@@ -18,7 +18,7 @@ export class AddFavorite {
     const findedUser = await this.userRepository.find(id);
 
     if (!findedUser) {
-      throw new UnauthorizedException();
+      throw new NotFoundException();
     }
 
     const result = findedUser.addFavorite({

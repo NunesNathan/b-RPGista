@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { UserRepository } from "@infra/http/repositories/user-repository";
 import {
   HttpFavorite,
@@ -13,7 +13,7 @@ export class RemoveFavorite {
     const findedUser = await this.userRepository.find(id);
 
     if (!findedUser) {
-      throw new UnauthorizedException();
+      throw new NotFoundException();
     }
 
     const result = findedUser.removeFavorite(contentId);

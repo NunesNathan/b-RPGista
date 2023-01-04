@@ -1,5 +1,5 @@
-import { Favorites } from "@application/entities/favorites";
-import { User } from "@application/entities/user";
+import { Favorites } from "@application/entities/user/favorites";
+import { User } from "@application/entities/user/user";
 
 export abstract class UserRepository {
   abstract findMany(): Promise<User[]>;
