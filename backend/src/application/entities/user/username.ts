@@ -7,7 +7,7 @@ export class Username {
     return (
       userName.length >= 4 &&
       userName.length <= 16 &&
-      userName.match(/[\S][^\W]/g)?.join("") === userName
+      userName.match(/[^.\W]/g)?.join("") === userName
     );
   }
 

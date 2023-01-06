@@ -4,7 +4,11 @@ export class SkillName {
   private readonly skillName: string;
 
   private validator(skillName: string) {
-    return skillName.length >= 2 && skillName.length <= 36;
+    return (
+      skillName.length >= 3 &&
+      skillName.length <= 36 &&
+      skillName.match(/[.\s\w]/g)?.join("") === skillName
+    );
   }
 
   constructor(skillName: string) {
