@@ -59,9 +59,12 @@ export class Favorites {
   public removeFavorite(contentId: string) {
     let hasChanged = false;
 
-    this.props.saved = this.props.saved.filter(
-      (favorite) => favorite.contentId !== contentId && (hasChanged = true),
-    );
+    this.props.saved = this.props.saved.filter((favorite) => {
+      if (favorite.contentId !== contentId) {
+        return favorite;
+      }
+      hasChanged = true;
+    });
 
     if (!hasChanged) {
       throw new FavoriteNotFoundError();
