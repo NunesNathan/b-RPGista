@@ -1,9 +1,10 @@
 import { ActionType } from "@prisma/client";
 import { EffectNotFoundError } from "@application/auth/errors/effect-not-found.error";
 import { InvalidActionTypeError } from "@application/auth/errors/invalid-action-type.error";
-import { SkillsFactory } from "@test/factories/skills-factory";
+import { EffectsFactory } from "@test/factories/effects-factory";
 import { PrerequisiteFactory } from "@test/factories/prerequisite-factory";
-import { Effect, Effects, EffectType } from "../effect/effects";
+import { SkillsFactory } from "@test/factories/skills-factory";
+import { Effects } from "../effect/effects";
 import { Skill } from "./skill";
 
 describe("Skill entity", () => {
@@ -59,10 +60,7 @@ describe("Skill entity", () => {
   });
 
   it("should be able to add a skill effect", () => {
-    skill.addSkillEffect({
-      effectType: EffectType.ATTRIBUTE,
-      effect: "attribute",
-    } as Effect);
+    skill.addSkillEffect(EffectsFactory.Effect());
 
     expect(skill.effect[0].effectId).toBeDefined();
     expect(skill.effect[0].effectType).toEqual("ATTRIBUTE");
