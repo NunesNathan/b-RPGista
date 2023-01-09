@@ -24,9 +24,13 @@ export class Skills {
   public removeSkill(skillId: string) {
     let hasChanged = false;
 
-    this.props.skills = this.props.skills.filter(
-      (skill) => skill.id !== skillId && (hasChanged = true),
-    );
+    this.props.skills = this.props.skills.filter((skill) => {
+      if (skill.id !== skillId) {
+        return skill;
+      }
+
+      hasChanged = true;
+    });
 
     if (!hasChanged) {
       throw new SkillNotFoundError();

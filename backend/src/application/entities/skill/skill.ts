@@ -9,7 +9,7 @@ import { SkillName } from "./skillname";
 
 export interface SkillProps {
   id: string;
-  name: SkillName;
+  name: string;
   prerequisites: Prerequisite[];
   description: string;
   action: ActionType;
@@ -41,7 +41,7 @@ export class Skill {
     this.props = {
       ...props,
       id: props.id ?? randomUUID(),
-      name: new SkillName(props.name),
+      name: new SkillName(props.name).value,
       prerequisites: props.prerequisites ?? [],
       effect: props.effect ?? new Effects([]),
       views: props.views ?? 0,
@@ -56,7 +56,7 @@ export class Skill {
   }
 
   public get name(): string {
-    return this.props.name.value;
+    return this.props.name;
   }
 
   public get prerequisites(): Prerequisite[] {
