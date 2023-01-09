@@ -9,7 +9,7 @@ import { Effect, Effects } from "../effect/effects";
 
 export interface ParanormalPowerProps {
   id: string;
-  name: ParanormalPowerName;
+  name: string;
   prerequisites: Prerequisite[];
   description: string;
   action: ActionType;
@@ -41,7 +41,7 @@ export class ParanormalPower {
     this.props = {
       ...props,
       id: props.id ?? randomUUID(),
-      name: new ParanormalPowerName(props.name),
+      name: new ParanormalPowerName(props.name).value,
       prerequisites: props.prerequisites ?? [],
       effect: props.effect ?? new Effects([]),
       views: props.views ?? 0,
@@ -56,7 +56,7 @@ export class ParanormalPower {
   }
 
   public get name(): string {
-    return this.props.name.value;
+    return this.props.name;
   }
 
   public get prerequisites(): Prerequisite[] {
