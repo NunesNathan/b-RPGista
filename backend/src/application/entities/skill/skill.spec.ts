@@ -1,18 +1,13 @@
+import { ActionType } from "@prisma/client";
 import { EffectNotFoundError } from "@application/auth/errors/effect-not-found.error";
 import { InvalidActionTypeError } from "@application/auth/errors/invalid-action-type.error";
-import { ActionType } from "@prisma/client";
 import { Effect, Effects, EffectType } from "../effect/effects";
 import { Prerequisite, PrerequisiteType } from "../prerequisite/prerequisite";
 import { Skill } from "./skill";
+import { SkillsFactory } from "@test/factories/skills-factory";
 
 describe("Skill entity", () => {
-  const skill = new Skill({
-    name: "test",
-    description: "test description",
-    action: ActionType.FREE,
-    effect: new Effects([]),
-    creatorId: "creator-id",
-  });
+  const skill = SkillsFactory.skill();
 
   const prerequisite = new Prerequisite({
     prerequisite: "prerequisite-name",
