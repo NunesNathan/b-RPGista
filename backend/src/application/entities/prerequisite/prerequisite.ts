@@ -8,7 +8,7 @@ export enum PrerequisiteType {
   OTHER = "OTHER",
 }
 
-interface PrerequisiteProps {
+export interface PrerequisiteProps {
   prerequisiteId: string;
   prerequisiteType: PrerequisiteType;
   prerequisite: string;
@@ -30,5 +30,9 @@ export class Prerequisite {
 
   public get prerequisiteId(): string {
     return this.props.prerequisiteId;
+  }
+
+  public get prerequisiteType(): PrerequisiteType {
+    return this.props.prerequisiteType;
   }
 }
