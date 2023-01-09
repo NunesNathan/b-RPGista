@@ -4,7 +4,10 @@ export class ParanormalPowerName {
   private readonly paranormalPowerName: string;
 
   private validator(paranormalPowerName: string) {
-    return paranormalPowerName.length >= 2 && paranormalPowerName.length <= 36;
+    return (
+      paranormalPowerName.replace(/\s/g, "").length >= 2 &&
+      paranormalPowerName.length <= 36
+    );
   }
 
   constructor(paranormalPowerName: string) {
