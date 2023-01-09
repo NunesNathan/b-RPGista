@@ -50,9 +50,12 @@ export class Effects {
   public removeEffect(effectId: string) {
     let hasChanged = false;
 
-    this.props.effects = this.props.effects.filter(
-      (effect) => effect.effectId !== effectId && (hasChanged = true),
-    );
+    this.props.effects = this.props.effects.filter((effect) => {
+      if (effect.effectId !== effectId) {
+        return effect;
+      }
+      hasChanged = true;
+    });
 
     if (!hasChanged) {
       throw new EffectNotFoundError();

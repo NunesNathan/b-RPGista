@@ -72,8 +72,12 @@ export class Skill {
     let hasChanged = false;
 
     this.props.prerequisites = this.props.prerequisites.filter(
-      (prerequisite) =>
-        prerequisite.prerequisiteId !== prerequisiteId && (hasChanged = true),
+      (prerequisite) => {
+        if (prerequisite.prerequisiteId !== prerequisiteId) {
+          return prerequisite;
+        }
+        hasChanged = true;
+      },
     );
 
     if (!hasChanged) {
@@ -87,7 +91,7 @@ export class Skill {
     return this.props.description;
   }
 
-  public set description(description: string) {
+  public changeDescription(description: string): void {
     this.props.description = description;
     this.props.updatedAt = new Date();
   }
@@ -96,7 +100,7 @@ export class Skill {
     return this.props.action;
   }
 
-  public set action(action: string) {
+  public changeAction(action: string): void {
     if (
       Object.values(ActionType).includes(action.toUpperCase() as ActionType)
     ) {
