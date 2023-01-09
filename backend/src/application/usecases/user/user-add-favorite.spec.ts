@@ -1,4 +1,4 @@
-import { Favorites } from "@application/entities/user/favorites";
+import { ContentType, Favorites } from "@application/entities/user/favorites";
 import { UserFactory } from "@test/factories/users-factory";
 import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersRepository";
 import { AddFavorite } from "./user-add-favorite";
@@ -28,10 +28,10 @@ describe("Add favorite to user", () => {
     ).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          contentType: "skill",
+          contentType: ContentType.SKILL,
         }),
         expect.objectContaining({
-          contentType: "skill",
+          contentType: ContentType.SKILL,
         }),
       ]),
     );

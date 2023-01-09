@@ -5,7 +5,7 @@ export class SkillName {
 
   private validator(skillName: string) {
     return (
-      skillName.length >= 3 &&
+      skillName.replace(/\s/g, "").length >= 3 &&
       skillName.length <= 36 &&
       skillName.match(/[.\s\w]/g)?.join("") === skillName
     );

@@ -1,18 +1,15 @@
 import { ActionType } from "@prisma/client";
 import { EffectNotFoundError } from "@application/auth/errors/effect-not-found.error";
 import { InvalidActionTypeError } from "@application/auth/errors/invalid-action-type.error";
-import { Effect, Effects, EffectType } from "../effect/effects";
-import { Prerequisite, PrerequisiteType } from "../prerequisite/prerequisite";
-import { Skill } from "./skill";
 import { SkillsFactory } from "@test/factories/skills-factory";
+import { PrerequisiteFactory } from "@test/factories/prerequisite-factory";
+import { Effect, Effects, EffectType } from "../effect/effects";
+import { Skill } from "./skill";
 
 describe("Skill entity", () => {
   const skill = SkillsFactory.skill();
 
-  const prerequisite = new Prerequisite({
-    prerequisite: "prerequisite-name",
-    prerequisiteType: PrerequisiteType.ANOTHER_SKILL,
-  });
+  const prerequisite = PrerequisiteFactory.prerequisite();
 
   it("should be able to create an instance", () => {
     expect(skill).toBeInstanceOf(Skill);

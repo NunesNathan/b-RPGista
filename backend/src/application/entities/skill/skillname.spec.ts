@@ -10,7 +10,7 @@ describe("Skillname object value", () => {
   it("should not be able to create an instance with an invalid skillname", () => {
     expect(() => new SkillName("")).toThrow(InvalidSkillNameError);
     expect(() => new SkillName("l@rr$")).toThrow(InvalidSkillNameError);
-    expect(() => new SkillName("l rr")).toThrow(InvalidSkillNameError);
+    expect(() => new SkillName("    ")).toThrow(InvalidSkillNameError);
   });
 
   it("should not be able to create an instance with an invalid skillname size", () => {
