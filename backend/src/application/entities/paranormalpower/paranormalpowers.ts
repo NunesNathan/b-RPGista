@@ -16,17 +16,21 @@ export class ParanormalPowers {
     };
   }
 
-  public addParanormalPower(skill: ParanormalPower) {
-    this.props.powers.push(skill);
+  public addParanormalPower(power: ParanormalPower) {
+    this.props.powers.push(power);
     this.props.count = this.props.powers.length;
   }
 
-  public removeParanormalPower(skillId: string) {
+  public removeParanormalPower(powerId: string) {
     let hasChanged = false;
 
-    this.props.powers = this.props.powers.filter(
-      (skill) => skill.id !== skillId && (hasChanged = true),
-    );
+    this.props.powers = this.props.powers.filter((power) => {
+      if (power.id !== powerId) {
+        return power;
+      }
+
+      hasChanged = true;
+    });
 
     if (!hasChanged) {
       throw new ParanormalPowerNotFoundError();

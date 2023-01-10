@@ -21,7 +21,7 @@ export class ParanormalPowersFactory {
     });
   }
 
-  static paranormalPowers(override: ParanormalPower[]): ParanormalPowers {
+  static paranormalPowers(override: ParanormalPower[] = []): ParanormalPowers {
     const paranormalPowers = new ParanormalPowers([
       this.paranormalPower(),
       this.paranormalPower({ action: ActionType.MOVE }),
