@@ -3,7 +3,7 @@ import { SkillsFactory } from "@test/factories/skills-factory";
 import { Skills } from "./skills";
 
 describe("Skills value object", () => {
-  const skills = new Skills([SkillsFactory.skill(), SkillsFactory.skill()]);
+  const skills = SkillsFactory.skills();
 
   it("should be able to create an instance", () => {
     expect(skills).toBeInstanceOf(Skills);
