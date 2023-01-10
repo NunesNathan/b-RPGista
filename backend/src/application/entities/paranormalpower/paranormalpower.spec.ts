@@ -94,6 +94,18 @@ describe("Paranormalpower entity", () => {
 
     paranormalpower.removeParanormalPowerEffect(skillEffect.effectId);
 
-    expect(paranormalpower.effect).toEqual([]);
+    expect(paranormalpower.effectsCount()).toEqual(2);
+  });
+
+  it("should be able to add a view", () => {
+    paranormalpower.addView();
+
+    expect(paranormalpower.views).toBe(1);
+  });
+
+  it("should be able to add a favorite", () => {
+    paranormalpower.addFavorite();
+
+    expect(paranormalpower.favorites).toBe(1);
   });
 });

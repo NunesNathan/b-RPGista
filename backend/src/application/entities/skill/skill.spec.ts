@@ -83,4 +83,16 @@ describe("Skill entity", () => {
       "Effect not founded",
     );
   });
+
+  it("should be able to add a view", () => {
+    skill.addView();
+
+    expect(skill.views).toBe(1);
+  });
+
+  it("should be able to add a favorite", () => {
+    skill.addFavorite();
+
+    expect(skill.favorites).toBe(1);
+  });
 });

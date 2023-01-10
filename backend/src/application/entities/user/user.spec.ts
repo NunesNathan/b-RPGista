@@ -33,7 +33,7 @@ describe("User entity", () => {
 
   it("should be able to add a view", () => {
     user.addView();
-    user.addView();
-    expect(user.views).toEqual(2);
+
+    expect(user.views).toBe(1);
   });
 });

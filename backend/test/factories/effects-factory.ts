@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import {
   Effect,
   Effects,
@@ -9,6 +10,7 @@ type Override = Partial<Effect>;
 export class EffectsFactory {
   static Effect(override: Override = {}): Effect {
     return {
+      effectId: randomUUID(),
       effectType: EffectType.ATTRIBUTE,
       effect: "attribute",
       ...override,

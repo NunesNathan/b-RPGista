@@ -137,8 +137,16 @@ export class ParanormalPower {
     return this.props.creatorId;
   }
 
+  public addView() {
+    this.props.views += 1;
+  }
+
   public get views(): number {
     return this.props.views;
+  }
+
+  public addFavorite() {
+    this.props.favorites += 1;
   }
 
   public get favorites(): number {
