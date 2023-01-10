@@ -19,17 +19,15 @@ export class SkillsFactory {
   }
 
   static skills(override: Skill[] = []): Skills {
-    const paranormalPowers = new Skills([
+    const skills = new Skills([
       this.skill(),
-      this.skill({ action: ActionType.FREE }),
+      this.skill({ action: ActionType.MOVE }),
     ]);
 
     if (override) {
-      override.forEach((paranormalPower) =>
-        paranormalPowers.addSkill(paranormalPower),
-      );
+      override.forEach((skill) => skills.addSkill(skill));
     }
 
-    return paranormalPowers;
+    return skills;
   }
 }

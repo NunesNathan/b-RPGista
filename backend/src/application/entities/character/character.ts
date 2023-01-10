@@ -62,7 +62,7 @@ export class Character {
     return this.props.name.value;
   }
 
-  public set name(name: string) {
+  public changeName(name: string) {
     const changedName = new CharacterName(name, this.props.name.value);
 
     if (this.props.name === changedName) {
@@ -76,7 +76,7 @@ export class Character {
     return this.props.description;
   }
 
-  public set description(description: string) {
+  public changeDescription(description: string) {
     this.props.description = description;
   }
 
@@ -84,8 +84,8 @@ export class Character {
     return this.props.nex;
   }
 
-  public set nex(nex: number) {
-    if (nex >= 0) {
+  public changeNex(nex: number) {
+    if (nex >= 0 && nex < 100) {
       if (nex === 0 || nex % 5 === 0 || nex === 99) {
         this.props.nex = nex;
         return;
@@ -99,13 +99,13 @@ export class Character {
     return this.props.class;
   }
 
-  public set class(characterClass: string) {
+  public changeClass(characterClass: string) {
     if (
       Object.values(CharacterClass).includes(
         characterClass.toUpperCase() as CharacterClass,
       )
     ) {
-      this.class = characterClass;
+      this.props.class = characterClass as CharacterClass;
     } else {
       throw new InvalidCharacterClassError();
     }
@@ -159,8 +159,8 @@ export class Character {
     return this.props.views;
   }
 
-  public addView(view: number) {
-    this.props.views += view;
+  public addView() {
+    this.props.views += 1;
   }
 
   public get favorites(): number {
@@ -169,5 +169,13 @@ export class Character {
 
   public addFavorite() {
     this.props.favorites += 1;
+  }
+
+  public get createdAt(): Date {
+    return this.props.createdAt;
+  }
+
+  public get updatedAt(): Date {
+    return this.props.updatedAt;
   }
 }
