@@ -4,12 +4,18 @@ export class CharacterName {
   private readonly characterName: string;
 
   private validator(characterName: string) {
-    return characterName.length >= 3 && characterName.length <= 28;
+    return (
+      characterName.length >= 4 &&
+      characterName.length <= 28 &&
+      characterName.match(/[^.\W]/g)?.join("") === characterName
+    );
   }
 
-  constructor(characterName: string, oldCharacterName = "") {
-    if (characterName.toLowerCase() !== oldCharacterName.toLowerCase()) {
-      throw new InvalidCharacterNameError();
+  constructor(characterName: string, oldCharacterName: string | null = null) {
+    if (oldCharacterName) {
+      if (characterName.toLowerCase() !== oldCharacterName.toLowerCase()) {
+        throw new InvalidCharacterNameError();
+      }
     }
 
     const isValidCharacterName = this.validator(characterName);
