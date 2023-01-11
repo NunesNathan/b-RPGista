@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { UserRepository } from "@infra/http/repositories/user-repository";
 import {
   HttpUser,
@@ -13,7 +13,7 @@ export class addView {
     const findedUser = await this.userRepository.find(id);
 
     if (!findedUser) {
-      throw new UnauthorizedException();
+      throw new NotFoundException();
     }
 
     findedUser.addView();

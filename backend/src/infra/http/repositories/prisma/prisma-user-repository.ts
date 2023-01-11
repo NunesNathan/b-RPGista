@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
-import { Favorites } from "@application/entities/favorites";
-import { User } from "@application/entities/user";
+import { Favorites } from "@application/entities/user/favorites";
+import { User } from "@application/entities/user/user";
 import { PrismaUserMapper } from "@infra/database/prisma/mappers/prisma-users-mapper";
 import { PrismaService } from "@infra/database/prisma/prisma.service";
 import { UserRepository } from "../user-repository";

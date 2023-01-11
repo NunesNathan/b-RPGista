@@ -4,7 +4,11 @@ export class Username {
   private readonly userName: string;
 
   private validator(userName: string) {
-    return userName.length >= 4 && userName.length <= 16;
+    return (
+      userName.length >= 4 &&
+      userName.length <= 16 &&
+      userName.match(/[^.\W]/g)?.join("") === userName
+    );
   }
 
   constructor(userName: string) {

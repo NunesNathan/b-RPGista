@@ -1,8 +1,8 @@
 import * as bcrypt from "bcrypt";
 import { LoginRequestBody } from "@application/auth/middlewares/models/login-request-body";
 import { HttpUser } from "@infra/http/viewmodels/user-view-model";
-import { UserFactory } from "@test/factories/users-factory";
-import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersRepository";
+import { UserFactory } from "@test/factories/users.factory";
+import { InMemoryUsersRepository } from "@test/repositories/In-memory-users.repository";
 import { UserDelete } from "./user-delete";
 import { UserFindMany } from "./user-find-many";
 
@@ -14,7 +14,7 @@ describe("Delete user", () => {
   const makeUser = UserFactory.user;
 
   it("should be able to delete a user", async () => {
-    const usersRepository = new InMemoryUserRepository();
+    const usersRepository = new InMemoryUsersRepository();
     const userFindMany = new UserFindMany(usersRepository);
     const userDelete = new UserDelete(usersRepository);
 

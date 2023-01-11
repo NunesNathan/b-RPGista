@@ -1,11 +1,11 @@
-import { Email } from "@application/entities/email";
+import { Email } from "@application/entities/user/email";
 import {
   ContentType,
   Favorite,
   Favorites,
-} from "@application/entities/favorites";
-import { User, UserProps } from "@application/entities/user";
-import { Username } from "@application/entities/username";
+} from "@application/entities/user/favorites";
+import { User, UserProps } from "@application/entities/user/user";
+import { Username } from "@application/entities/user/username";
 
 type Override = Partial<UserProps>;
 type OverrideFavorite = Partial<Favorite>;

@@ -1,6 +1,6 @@
-import { Favorites } from "@application/entities/favorites";
-import { UserFactory } from "@test/factories/users-factory";
-import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersRepository";
+import { ContentType, Favorites } from "@application/entities/user/favorites";
+import { UserFactory } from "@test/factories/users.factory";
+import { InMemoryUsersRepository } from "@test/repositories/In-memory-users.repository";
 import { AddFavorite } from "./user-add-favorite";
 import { UserFind } from "./user-find";
 
@@ -9,7 +9,7 @@ describe("Add favorite to user", () => {
   const makeFavorite = UserFactory.favorite;
 
   it("should be able to add a favorite using id", async () => {
-    const usersRepository = new InMemoryUserRepository();
+    const usersRepository = new InMemoryUsersRepository();
     const userFind = new UserFind(usersRepository);
     const addFavorite = new AddFavorite(usersRepository);
 
@@ -28,10 +28,10 @@ describe("Add favorite to user", () => {
     ).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          contentType: "skill",
+          contentType: ContentType.SKILL,
         }),
         expect.objectContaining({
-          contentType: "skill",
+          contentType: ContentType.SKILL,
         }),
       ]),
     );
