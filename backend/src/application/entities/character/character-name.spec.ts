@@ -1,7 +1,7 @@
 import { InvalidCharacterNameError } from "@application/auth/errors/invalid-character-name.error";
-import { CharacterName } from "./charactername";
+import { CharacterName } from "./character-name";
 
-describe("Charactername value object", () => {
+describe("Character name value object", () => {
   const validCharacterName = "characterName";
   const numericValidCharacterName = "1s4r";
   const smallerInvalidCharacterName = "cha";

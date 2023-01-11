@@ -4,7 +4,7 @@ import { InvalidActionTypeError } from "@application/auth/errors/invalid-action-
 import { PrerequisiteNotFoundError } from "@application/auth/errors/prerequisite-not-found.error";
 import { Replace } from "@helpers/replace";
 import { Prerequisite } from "../prerequisite/prerequisite";
-import { ParanormalPowerName } from "./paranormalpowername";
+import { ParanormalPowerName } from "./paranormal-power-name";
 import { Effect, Effects } from "../effect/effects";
 
 export interface ParanormalPowerProps {

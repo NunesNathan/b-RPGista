@@ -1,19 +1,19 @@
-import { UserFactory } from "@test/factories/users-factory";
-import { InMemoryUserRepository } from "@test/repositories/InMemoryUsersRepository";
+import { UserFactory } from "@test/factories/users.factory";
+import { InMemoryUsersRepository } from "@test/repositories/In-memory-users.repository";
 import { UserFindMany } from "./user-find-many";
 
 describe("Get users", () => {
   const makeUser = UserFactory.user;
 
   it("should be able to get empty list", async () => {
-    const usersRepository = new InMemoryUserRepository();
+    const usersRepository = new InMemoryUsersRepository();
     const userFindMany = new UserFindMany(usersRepository);
 
     expect(await userFindMany.execute()).toEqual([]);
   });
 
   it("should be able to get users list", async () => {
-    const usersRepository = new InMemoryUserRepository();
+    const usersRepository = new InMemoryUsersRepository();
     const userFindMany = new UserFindMany(usersRepository);
 
     await usersRepository.create(makeUser());

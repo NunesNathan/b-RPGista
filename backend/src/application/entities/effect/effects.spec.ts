@@ -1,5 +1,5 @@
 import { EffectNotFoundError } from "@application/auth/errors/effect-not-found.error";
-import { EffectsFactory } from "@test/factories/effects-factory";
+import { EffectsFactory } from "@test/factories/effects.factory";
 import { Effects, EffectType } from "./effects";
 
 describe("Effects object value", () => {

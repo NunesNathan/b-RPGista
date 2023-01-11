@@ -1,9 +1,9 @@
 import { ActionType } from "@prisma/client";
 import { EffectNotFoundError } from "@application/auth/errors/effect-not-found.error";
 import { InvalidActionTypeError } from "@application/auth/errors/invalid-action-type.error";
-import { EffectsFactory } from "@test/factories/effects-factory";
-import { PrerequisiteFactory } from "@test/factories/prerequisite-factory";
-import { SkillsFactory } from "@test/factories/skills-factory";
+import { EffectsFactory } from "@test/factories/effects.factory";
+import { PrerequisiteFactory } from "@test/factories/prerequisite.factory";
+import { SkillsFactory } from "@test/factories/skills.factory";
 import { Effects } from "../effect/effects";
 import { Skill } from "./skill";
 

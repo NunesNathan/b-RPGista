@@ -1,4 +1,4 @@
-import { UserFactory } from "@test/factories/users-factory";
+import { UserFactory } from "@test/factories/users.factory";
 
 describe("User entity", () => {
   const user = UserFactory.user();

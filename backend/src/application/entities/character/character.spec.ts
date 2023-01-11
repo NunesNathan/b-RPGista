@@ -1,11 +1,11 @@
 import { InvalidCharacterClassError } from "@application/auth/errors/invalid-character-class.error";
 import { InvalidNexError } from "@application/auth/errors/invalid-nex.error";
 import { ActionType, Class } from "@prisma/client";
-import { CharacterFactory } from "@test/factories/character-factory";
-import { ParanormalPowersFactory } from "@test/factories/paranormalpowers-factory";
-import { SkillsFactory } from "@test/factories/skills-factory";
+import { CharacterFactory } from "@test/factories/character.factory";
+import { ParanormalPowersFactory } from "@test/factories/paranormal-powers.factory";
+import { SkillsFactory } from "@test/factories/skills.factory";
 import { Character } from "./character";
-import { ParanormalPowers } from "../paranormalpower/paranormalpowers";
+import { ParanormalPowers } from "../paranormalpower/paranormal-powers";
 import { Skills } from "../skill/skills";
 
 describe("Character entity", () => {

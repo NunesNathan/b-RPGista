@@ -1,5 +1,5 @@
 import { SkillNotFoundError } from "@application/auth/errors/skill-not-found.error";
-import { SkillsFactory } from "@test/factories/skills-factory";
+import { SkillsFactory } from "@test/factories/skills.factory";
 import { Skills } from "./skills";
 
 describe("Skills value object", () => {

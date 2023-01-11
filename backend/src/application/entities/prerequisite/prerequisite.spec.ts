@@ -1,4 +1,4 @@
-import { PrerequisiteFactory } from "@test/factories/prerequisite-factory";
+import { PrerequisiteFactory } from "@test/factories/prerequisite.factory";
 import { Prerequisite, PrerequisiteType } from "./prerequisite";
 
 describe("Prerequisite value object", () => {

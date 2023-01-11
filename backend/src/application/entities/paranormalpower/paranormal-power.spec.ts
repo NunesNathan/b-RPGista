@@ -1,13 +1,13 @@
 import { ActionType } from "@prisma/client";
 import { InvalidActionTypeError } from "@application/auth/errors/invalid-action-type.error";
 import { PrerequisiteNotFoundError } from "@application/auth/errors/prerequisite-not-found.error";
-import { EffectsFactory } from "@test/factories/effects-factory";
-import { ParanormalPowersFactory } from "@test/factories/paranormalpowers-factory";
-import { PrerequisiteFactory } from "@test/factories/prerequisite-factory";
+import { EffectsFactory } from "@test/factories/effects.factory";
+import { ParanormalPowersFactory } from "@test/factories/paranormal-powers.factory";
+import { PrerequisiteFactory } from "@test/factories/prerequisite.factory";
 import { Effects, EffectType } from "../effect/effects";
-import { ParanormalPower } from "./paranormalpower";
+import { ParanormalPower } from "./paranormal-power";
 
-describe("Paranormalpower entity", () => {
+describe("Paranormal power entity", () => {
   const paranormalpower = ParanormalPowersFactory.paranormalPower();
 
   it("should be able to create an instance", () => {
@@ -81,7 +81,7 @@ describe("Paranormalpower entity", () => {
     );
   });
 
-  it("should be able to add a paranormalpower effect", () => {
+  it("should be able to add a paranormal power effect", () => {
     paranormalpower.addParanormalPowerEffect(EffectsFactory.Effect());
 
     expect(paranormalpower.effect[0].effectId).toBeDefined();
@@ -89,7 +89,7 @@ describe("Paranormalpower entity", () => {
     expect(paranormalpower.effect[0].effect).toEqual("attribute");
   });
 
-  it("should be able to remove a paranormalpower effect", () => {
+  it("should be able to remove a paranormal power effect", () => {
     const skillEffect = paranormalpower.effect[0];
 
     paranormalpower.removeParanormalPowerEffect(skillEffect.effectId);

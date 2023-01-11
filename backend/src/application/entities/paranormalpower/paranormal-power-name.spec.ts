@@ -1,7 +1,7 @@
 import { InvalidParanormalPowerNameError } from "@application/auth/errors/invalid-paranormal-power-name.error";
-import { ParanormalPowerName } from "./paranormalpowername";
+import { ParanormalPowerName } from "./paranormal-power-name";
 
-describe("Paranormalpower name object value", () => {
+describe("Paranormal power name object value", () => {
   it("should be able to create an instance", () => {
     expect(new ParanormalPowerName("valid name").value).toEqual("valid name");
   });

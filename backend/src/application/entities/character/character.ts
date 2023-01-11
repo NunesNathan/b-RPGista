@@ -4,9 +4,9 @@ import { InvalidCharacterClassError } from "@application/auth/errors/invalid-cha
 import { InvalidCharacterNameError } from "@application/auth/errors/invalid-character-name.error";
 import { InvalidNexError } from "@application/auth/errors/invalid-nex.error";
 import { Replace } from "@helpers/replace";
-import { CharacterName } from "./charactername";
-import { ParanormalPower } from "../paranormalpower/paranormalpower";
-import { ParanormalPowers } from "../paranormalpower/paranormalpowers";
+import { CharacterName } from "./character-name";
+import { ParanormalPower } from "../paranormalpower/paranormal-power";
+import { ParanormalPowers } from "../paranormalpower/paranormal-powers";
 import { Skill } from "../skill/skill";
 import { Skills } from "../skill/skills";
 

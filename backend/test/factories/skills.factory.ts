@@ -1,7 +1,7 @@
 import { ActionType } from "@prisma/client";
 import { Effects } from "@application/entities/effect/effects";
 import { Skill, SkillProps } from "@application/entities/skill/skill";
-import { SkillName } from "@application/entities/skill/skillname";
+import { SkillName } from "@application/entities/skill/skill-name";
 import { Skills } from "@application/entities/skill/skills";
 
 type Override = Partial<SkillProps>;

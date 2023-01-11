@@ -2,10 +2,10 @@ import { ActionType } from "@prisma/client";
 import {
   ParanormalPowerProps,
   ParanormalPower,
-} from "@application/entities/paranormalpower/paranormalpower";
-import { ParanormalPowerName } from "@application/entities/paranormalpower/paranormalpowername";
-import { ParanormalPowers } from "@application/entities/paranormalpower/paranormalpowers";
-import { EffectsFactory } from "./effects-factory";
+} from "@application/entities/paranormalpower/paranormal-power";
+import { ParanormalPowerName } from "@application/entities/paranormalpower/paranormal-power-name";
+import { ParanormalPowers } from "@application/entities/paranormalpower/paranormal-powers";
+import { EffectsFactory } from "./effects.factory";
 
 type Override = Partial<ParanormalPowerProps>;
 

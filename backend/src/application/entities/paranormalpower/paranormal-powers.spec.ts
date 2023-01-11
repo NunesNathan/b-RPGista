@@ -1,8 +1,8 @@
 import { ParanormalPowerNotFoundError } from "@application/auth/errors/paranormal-power-not-found.error";
-import { ParanormalPowersFactory } from "@test/factories/paranormalpowers-factory";
-import { ParanormalPowers } from "./paranormalpowers";
+import { ParanormalPowersFactory } from "@test/factories/paranormal-powers.factory";
+import { ParanormalPowers } from "./paranormal-powers";
 
-describe("Paranormalpower value object", () => {
+describe("Paranormal power value object", () => {
   const paranormalPowers = ParanormalPowersFactory.paranormalPowers();
 
   it("should be able to create an instance", () => {

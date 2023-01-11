@@ -5,7 +5,7 @@ import { PrerequisiteNotFoundError } from "@application/auth/errors/prerequisite
 import { Replace } from "@helpers/replace";
 import { Effect, Effects } from "../effect/effects";
 import { Prerequisite } from "../prerequisite/prerequisite";
-import { SkillName } from "./skillname";
+import { SkillName } from "./skill-name";
 
 export interface SkillProps {
   id: string;

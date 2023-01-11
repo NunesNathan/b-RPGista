@@ -3,9 +3,9 @@ import {
   Character,
   CharacterProps,
 } from "@application/entities/character/character";
-import { CharacterName } from "@application/entities/character/charactername";
-import { ParanormalPowersFactory } from "./paranormalpowers-factory";
-import { SkillsFactory } from "./skills-factory";
+import { CharacterName } from "@application/entities/character/character-name";
+import { ParanormalPowersFactory } from "./paranormal-powers.factory";
+import { SkillsFactory } from "./skills.factory";
 
 type Override = Partial<CharacterProps>;
 

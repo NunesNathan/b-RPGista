@@ -1,5 +1,5 @@
 import { ParanormalPowerNotFoundError } from "@application/auth/errors/paranormal-power-not-found.error";
-import { ParanormalPower } from "./paranormalpower";
+import { ParanormalPower } from "./paranormal-power";
 
 export interface ParanormalPowersProps {
   count: number;
