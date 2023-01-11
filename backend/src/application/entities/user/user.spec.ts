@@ -1,20 +1,14 @@
-import { Email } from "./email";
-import { User } from "./user";
-import { Username } from "./username";
+import { UserFactory } from "@test/factories/users-factory";
 
 describe("User entity", () => {
-  const user = new User({
-    username: new Username("test"),
-    email: new Email("test@test.com"),
-    password: "password",
-  });
+  const user = UserFactory.user();
 
   it("should be able to create an instance", () => {
     expect(user).toBeTruthy();
     expect(user.id);
     expect(user.email).toEqual("test@test.com");
     expect(user.username).toEqual("test");
-    expect(user.password).toEqual("password");
+    expect(user.password).toEqual("test");
     expect(user.views).toEqual(0);
     expect(user.favorites).toEqual('{"count":0,"saved":[]}');
     expect(user.favoriteList).toEqual([]);
