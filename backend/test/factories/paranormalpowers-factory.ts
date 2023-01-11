@@ -3,8 +3,8 @@ import {
   ParanormalPowerProps,
   ParanormalPower,
 } from "@application/entities/paranormalpower/paranormalpower";
-import { ParanormalPowers } from "@application/entities/paranormalpower/paranormalpowers";
 import { ParanormalPowerName } from "@application/entities/paranormalpower/paranormalpowername";
+import { ParanormalPowers } from "@application/entities/paranormalpower/paranormalpowers";
 import { EffectsFactory } from "./effects-factory";
 
 type Override = Partial<ParanormalPowerProps>;

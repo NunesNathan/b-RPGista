@@ -15,12 +15,12 @@ describe("User entity", () => {
     expect(user.email).toEqual("test@test.com");
     expect(user.username).toEqual("test");
     expect(user.password).toEqual("password");
-    expect(user.createdAt).toBeTruthy();
-    expect(user.updatedAt).toBeTruthy();
     expect(user.views).toEqual(0);
     expect(user.favorites).toEqual('{"count":0,"saved":[]}');
-    expect(user.favoritesCount).toEqual(0);
     expect(user.favoriteList).toEqual([]);
+    expect(user.favoritesCount).toEqual(0);
+    expect(user.createdAt).toBeInstanceOf(Date);
+    expect(user.updatedAt).toBeInstanceOf(Date);
   });
 
   it("should be able to update an instance", () => {

@@ -1,11 +1,11 @@
 import { ActionType } from "@prisma/client";
+import { InvalidActionTypeError } from "@application/auth/errors/invalid-action-type.error";
 import { PrerequisiteNotFoundError } from "@application/auth/errors/prerequisite-not-found.error";
+import { EffectsFactory } from "@test/factories/effects-factory";
 import { ParanormalPowersFactory } from "@test/factories/paranormalpowers-factory";
 import { PrerequisiteFactory } from "@test/factories/prerequisite-factory";
 import { Effects, EffectType } from "../effect/effects";
 import { ParanormalPower } from "./paranormalpower";
-import { InvalidActionTypeError } from "@application/auth/errors/invalid-action-type.error";
-import { EffectsFactory } from "@test/factories/effects-factory";
 
 describe("Paranormalpower entity", () => {
   const paranormalpower = ParanormalPowersFactory.paranormalPower();

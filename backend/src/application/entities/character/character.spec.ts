@@ -4,9 +4,9 @@ import { ActionType, Class } from "@prisma/client";
 import { CharacterFactory } from "@test/factories/character-factory";
 import { ParanormalPowersFactory } from "@test/factories/paranormalpowers-factory";
 import { SkillsFactory } from "@test/factories/skills-factory";
+import { Character } from "./character";
 import { ParanormalPowers } from "../paranormalpower/paranormalpowers";
 import { Skills } from "../skill/skills";
-import { Character } from "./character";
 
 describe("Character entity", () => {
   const character = CharacterFactory.char();
