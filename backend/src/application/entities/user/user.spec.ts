@@ -5,7 +5,7 @@ describe("User entity", () => {
 
   it("should be able to create an instance", () => {
     expect(user).toBeTruthy();
-    expect(user.id);
+    expect(user.id).toBeDefined();
     expect(user.email).toEqual("test@test.com");
     expect(user.username).toEqual("test");
     expect(user.password).toEqual("test");
