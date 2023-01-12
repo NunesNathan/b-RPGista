@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { ConflictException, Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import { Favorites } from "@application/entities/user/favorites";
 import { User } from "@application/entities/user/user";
@@ -57,9 +57,13 @@ export class PrismaUserRepository implements UserRepository {
   async create(user: User): Promise<User> {
     const data = PrismaUserMapper.toPrisma(user);
 
-    await this.prisma.user.create({
-      data: data as Prisma.UserCreateInput,
-    });
+    try {
+      await this.prisma.user.create({
+        data: data as Prisma.UserCreateInput,
+      });
+    } catch (error) {
+      throw new ConflictException();
+    }
 
     return PrismaUserMapper.toDomain(data);
   }
