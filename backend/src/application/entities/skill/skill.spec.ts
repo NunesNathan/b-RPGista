@@ -95,4 +95,10 @@ describe("Skill entity", () => {
 
     expect(skill.favorites).toBe(1);
   });
+
+  it("should be able to remove a favorite", () => {
+    skill.removeFavorite();
+
+    expect(skill.favorites).toBe(0);
+  });
 });

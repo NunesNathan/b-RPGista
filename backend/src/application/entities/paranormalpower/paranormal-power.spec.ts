@@ -108,4 +108,10 @@ describe("Paranormal power entity", () => {
 
     expect(paranormalpower.favorites).toBe(1);
   });
+
+  it("should be able to remove a favorite", () => {
+    paranormalpower.removeFavorite();
+
+    expect(paranormalpower.favorites).toBe(0);
+  });
 });

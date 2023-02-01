@@ -149,6 +149,10 @@ export class Skill {
     this.props.favorites += 1;
   }
 
+  public removeFavorite() {
+    this.props.favorites -= 1;
+  }
+
   public get favorites(): number {
     return this.props.favorites;
   }
