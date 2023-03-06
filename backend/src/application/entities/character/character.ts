@@ -171,6 +171,10 @@ export class Character {
     this.props.favorites += 1;
   }
 
+  public removeFavorite() {
+    this.props.favorites -= 1;
+  }
+
   public get createdAt(): Date {
     return this.props.createdAt;
   }

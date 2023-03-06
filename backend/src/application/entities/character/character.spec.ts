@@ -125,4 +125,10 @@ describe("Character entity", () => {
 
     expect(character.favorites).toBe(1);
   });
+
+  it("should be able to remove a favorite", () => {
+    character.removeFavorite();
+
+    expect(character.favorites).toBe(0);
+  });
 });

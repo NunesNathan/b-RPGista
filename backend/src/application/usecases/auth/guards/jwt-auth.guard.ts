@@ -33,11 +33,7 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
     const canActivatePromise = canActivate as Promise<boolean>;
 
     return canActivatePromise.catch((error) => {
-      if (error instanceof Error) {
-        throw new Error(error.message);
-      }
-
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(error.message);
     });
   }
 }

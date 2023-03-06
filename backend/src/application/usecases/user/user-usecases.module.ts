@@ -43,6 +43,6 @@ import { UserDelete } from "./user-delete";
 })
 export class UserUseCasesModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoginValidationMiddleware).forRoutes("remove_account");
+    consumer.apply(LoginValidationMiddleware).forRoutes("delete_account");
   }
 }
